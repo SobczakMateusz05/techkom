@@ -1,7 +1,7 @@
 <?php
     require_once "connect.php";
+    require_once "function.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -41,7 +41,7 @@
             </li>
             <li>
                 <form method="POST" action="index.php">
-                    <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt...">
+                    <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt... (efekt stylistyczny)">
                     <input type="submit" value="Wyszukaj">
                 </form>
             </li>
@@ -59,13 +59,7 @@
                 <li class="disable-selection liststylenone" onclick="list('products')"> Produkty</li>
                 <ul class="lista">
                     <?php
-                        require_once "connect.php";
-                        $sql="SELECT nazwa from type";
-                        if($result=$conn->query($sql)){
-                            while($row=$result->fetch_assoc()){
-                                echo '<li class="products disable disable-selection"><a href="#" onclick="category('."'". $row["nazwa"]. "'". ')">'. UCWORDS($row["nazwa"]).'</a></li>';
-                            }
-                        }
+                        products($conn);
                     ?>
                 </ul>
             </ul>

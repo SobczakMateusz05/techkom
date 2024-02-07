@@ -1,7 +1,7 @@
 <?php
     require_once "connect.php";
+    require_once "function.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -41,7 +41,7 @@
             </li>
             <li>
                 <form method="POST" action="index.php">
-                    <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt...">
+                    <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt... (efekt stylistyczny)">
                     <input type="submit" value="Wyszukaj">
                 </form>
             </li>
@@ -59,13 +59,7 @@
                 <li class="disable-selection liststylenone" onclick="list('products')"> Produkty</li>
                 <ul class="lista">
                     <?php
-                        require_once "connect.php";
-                        $sql="SELECT nazwa from type";
-                        if($result=$conn->query($sql)){
-                            while($row=$result->fetch_assoc()){
-                                echo '<li class="products disable disable-selection"><a href="#" onclick="category('."'". $row["nazwa"]. "'". ')">'. UCWORDS($row["nazwa"]).'</a></li>';
-                            }
-                        }
+                        products($conn);
                     ?>
                 </ul>
             </ul>
@@ -99,19 +93,112 @@
             <div class="right-bottom">
                 <div class="right-left">
                     <h2>
-                        Laptopy
+                    <?php
+                    echo UCWORDS($_GET["category"]);
+                    ?>
                     </h2>
-
+                    <div class="buttons-option">
+                        <?php
+                        if($_GET["category"]=="komputery"||$_GET["category"]=="laptopy"){
+                            echo '<h3 class="disable-selection button" onclick="filtr()">Filtrowanie</h3>
+                            <img src="img/matrixpills.png">';
+                        }
+                        ?>
+                        <form   method="POST" action="ofert.php?category=<?php echo $_GET["category"];?>">
+                            <select name="sort" onchange="this.form.submit()" class="button">
+                                <option>Wybierz typ sortowania...</option>
+                                <option value="1">Od najniższej ceny</option>
+                                <option value="2">Od najwyższej ceny</option>
+                            </select>
+                            <noscript><input type="submit" name="submit" value="sort"></noscript>
+                        </form>
+                    </div>
+                    <div class="filtr disable">
+                        <h3> FILTRY</h3>
+                        <form method="POST" action="ofert.php?category=<?php echo $_GET["category"];?>" class="filtrform">
+                            <h4>Procesor: 
+                                <select name="proc">
+                                    <option value="0"> Wybierz procesor </option>
+                                    <?php
+                                        $sql="SELECT Distinct procesor FROM produkty WHERE procesor is not null ORDER BY procesor ASC";
+                                        if( $_GET["category"]=='komputery'){
+                                            $sql="SELECT Distinct procesor FROM produkty as p JOIN type as t ON p.type = t.id WHERE procesor is not null and t.nazwa='komputery' ORDER BY procesor ASC";
+                                        }
+                                        if($_GET["category"]=='laptopy'){
+                                            $sql="SELECT Distinct procesor FROM produkty as p JOIN type as t ON p.type = t.id WHERE procesor is not null and t.nazwa='laptopy' ORDER BY procesor ASC";
+                                        }
+                                        if($result=$conn->query($sql)){
+                                            while($row=$result->fetch_assoc()){
+                                                echo "<option value=". '"' . $row["procesor"]. '">'. $row["procesor"] . "</option>";
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </h4>
+                            <h4>Pamięć RAM: 
+                                <select name="ram">
+                                <option value="0"> Wybierz ilość pamięci RAM</option>
+                                <?php
+                                        $sql="SELECT Distinct ram FROM produkty WHERE ram is not null ORDER BY ram ASC";
+                                        if( $_GET["category"]=='komputery'){
+                                            $sql="SELECT Distinct ram FROM produkty as p JOIN type as t ON p.type = t.id WHERE ram is not null and t.nazwa='komputery' ORDER BY ram ASC";
+                                        }
+                                        if($_GET["category"]=='laptopy'){
+                                            $sql="SELECT Distinct ram FROM produkty as p JOIN type as t ON p.type = t.id WHERE ram is not null and t.nazwa='laptopy' ORDER BY ram ASC";
+                                        }
+                                        
+                                        if($result=$conn->query($sql)){
+                                            while($row=$result->fetch_assoc()){
+                                                echo "<option value=". '"' . $row["ram"]. '">'. $row["ram"] . " GB </option>";
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </h4>
+                                <input type="submit" name="submit" value="Filtruj">
+                        </form>
+                    </div>
                     <?php
                     $category=$_GET["category"];
                     $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
+
+                    if(isset($_POST["submit"])){
+                        $ram=$_POST["ram"];
+                        $proc=$_POST["proc"];
+                        if($ram!=0&&$proc!=0){
+                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram' and p.procesor='$proc'";
+                        }
+                        if($ram!=0&&$proc==0){
+                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram'";
+                        }
+                        if($ram==0&&$proc!=0){
+                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.procesor='$proc'";
+                        }
+                        
+                    }
+                    if(isset($_POST["sort"])){
+                        if($_POST["sort"]==1){
+                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price ASC";
+                        }
+                        if($_POST["sort"]==2){
+                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price DESC";
+                        }
+                    }
+                    
                     if($result = $conn->query($sql)){
-                        while($row=$result->fetch_assoc()) 
-		                {
-                            echo '<div class="popular-post"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
-                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                            echo '<div class="addbasket disable-selection"> <a href="#">Dodaj do koszyka</a> </div> </div> </div>';
-		                }
+                        if(mysqli_num_rows($result)!=0){
+                            $num_row=mysqli_num_rows($result)*2;
+                            while($row=$result->fetch_assoc()) 
+		                    {
+                                echo '<div class="popular-post"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                                echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
+                                echo '<div class="addbasket disable-selection"> <a href="#">Dodaj do koszyka</a> </div> </div> </div>';
+		                    }
+                        }
+                        else{
+                            $num_row=3;
+                            echo "<h2 style=". '"color: red; margin-top:25px;"'."> Nie znaleziono żadnego przedmiotu</h2>";
+                        }
                     }
                     else{
                         echo "Nie odczytano żadnych danych";
@@ -124,7 +211,7 @@
                         Najnowsze
                     </h2>
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT 20";
+                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT $num_row";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
