@@ -1,0 +1,19 @@
+.right-bottom{
+    width: 60%;
+}
+.opinion{
+    color: #000000;
+    margin-top: 40px;
+    border-radius: 17px;
+    border: black solid 2px;
+}
+.opinion h2, .opinion h3, .opinion h5{
+    padding: 5px;
+}
+.opinion h3{
+    font-weight: normal;
+}
+.opinion h5{
+    text-align: end;
+    font-weight: lighter;
+}
