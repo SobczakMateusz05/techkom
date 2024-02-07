@@ -98,7 +98,7 @@
                     </h2>
 
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY popularity desc LIMIT 3";
+                    $sql = " SELECT * FROM produkty ORDER BY popularity desc LIMIT 15";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
@@ -118,7 +118,7 @@
                         Najnowsze
                     </h2>
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT 5";
+                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT 20";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
