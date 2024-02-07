@@ -9,7 +9,7 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <header>
+<header>
         <ul>
             <li>
 
@@ -21,19 +21,19 @@
                 
             </li>
             <li>
-                <a href="products.html" >Produkty</a>
+                <a href="products.php">Produkty</a>
             </li>
             <li>
                 
             </li>
             <li>
-                <a href="about.html" class="active">O nas</a>
+                <a href="about.php" class="active">O nas</a>
             </li>
             <li>
                 
             </li>
             <li>
-                <a href="contact.html">Kontakt</a>
+                <a href="contact.php">Kontakt</a>
             </li>
             <li>
                 <form method="POST" action="index.php">
@@ -47,24 +47,26 @@
                 </a>
             </li>
         </ul>
- 
     </header>
     <main>
         <div class="left">
             <h2 class="shop disable-selection">Ten Sklep</h2>
             <ul class="lista" > 
-                <li class="disable-selection liststylenone" onclick="products()"> Produkty</li>
+                <li class="disable-selection liststylenone" onclick="list('products')"> Produkty</li>
                 <ul class="lista">
-                    <li class="products disable disable-selection"><a href="laptop.php">Laptopy</a></li>
-                    <li class="products disable disable-selection"><a href="pc.php">Komputery</a></li>
-                    <li class="products disable disable-selection"><a href="#">Akcesoria</a></li>
-                    <li class="products disable disable-selection"><a href="#">Telefony</a></li>
-                    <li class="products disable disable-selection"><a href="#">Routery</a></li>
-                    <li class="products disable disable-selection"><a href="#">Konsole</a></li>
+                    <?php
+                        require_once "connect.php";
+                        $sql="SELECT nazwa from type";
+                        if($result=$conn->query($sql)){
+                            while($row=$result->fetch_assoc()){
+                                echo '<li class="products disable disable-selection"><a href="#" onclick="category('."'". $row["nazwa"]. "'". ')">'. UCWORDS($row["nazwa"]).'</a></li>';
+                            }
+                        }
+                    ?>
                 </ul>
             </ul>
             <ul class="lista">
-                <li class="disable-selection liststylenone" onclick="usluga()"> Usługi</li>
+                <li class="disable-selection liststylenone" onclick="list('usluga')"> Usługi</li>
                 <ul class="lista">
                     <li class="usluga disable disable-selection"><a href="#">Zamówienia</a></li>
                     <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
@@ -73,7 +75,7 @@
                 </ul>
             </ul>
             <ul class="lista">
-                <li class="disable-selection liststylenone" onclick="actual()"> Aktualności</li>
+                <li class="disable-selection liststylenone" onclick="list('actual')"> Aktualności</li>
                 <ul class="lista">
                     <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
                     <li class="actual disable disable-selection"><a href="#">Nasz sklep</a></li>

@@ -19,13 +19,13 @@
 
             </li>
             <li>
-                <a href="index.php"  class="active">Stona Główna</a>
+                <a href="index.php">Stona Główna</a>
             </li>
             <li>
                 
             </li>
             <li>
-                <a href="products.php">Produkty</a>
+                <a href="products.php" class="active">Produkty</a>
             </li>
             <li>
                 
@@ -53,7 +53,7 @@
         </ul>
     </header>
     <main>
-        <div class="left">
+    <div class="left">
             <h2 class="shop disable-selection">Ten Sklep</h2>
             <ul class="lista" > 
                 <li class="disable-selection liststylenone" onclick="list('products')"> Produkty</li>
@@ -90,17 +90,20 @@
         <div class="right">
             <div class="right-top">
                 <h3 class="disable-selection">
-                    TechKom > Ten Sklep > Strona Główna
+                    TechKom > Ten Sklep > Produkty > 
+                    <?php
+                    echo UCWORDS($_GET["category"]);
+                    ?>
                 </h3>
             </div>
             <div class="right-bottom">
                 <div class="right-left">
                     <h2>
-                        Najpopularniejsze
+                        Laptopy
                     </h2>
 
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY popularity desc LIMIT 15";
+                    $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='laptop'";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
