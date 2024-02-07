@@ -103,7 +103,8 @@
                     </h2>
 
                     <?php
-                    $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='laptop'";
+                    $category=$_GET["category"];
+                    $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
