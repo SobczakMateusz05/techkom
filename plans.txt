@@ -1,0 +1,5 @@
+szczegóły przedmiotów;
+opinia w skali 1/10;
+średnia opinii w skali 1/10;
+koszyk;
+zdjęcia kategorii produktów;
