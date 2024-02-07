@@ -7,7 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/styleopi.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/opinion.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <title>Sklep internetowy</title>
     <script src="script.js"></script>
@@ -96,7 +97,7 @@
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
                         {
-                            echo '<div class="opinion"> <h2>'. $row['username']. '</h2> <h3>'. $row['review']. '</h3> <h5>'. $row['date']. '</h5> </div>';
+                            echo '<div class="opinion"> <h2>'. $row['username']. '</h2> <h3>'. $row['review']. '</h3> <h5> Data dodania: '. $row['date']. '</h5> </div>';
                         }
                     }
                     else{
