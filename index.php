@@ -1,0 +1,145 @@
+<?php
+    require_once "connect.php";
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+    <title>Sklep internetowy</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <ul>
+            <li>
+
+            </li>
+            <li>
+                <a href="index.php" class="active">Stona Główna</a>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                <a href="products.html">Produkty</a>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                <a href="about.html">O nas</a>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                <a href="contact.html">Kontakt</a>
+            </li>
+            <li>
+                <form method="POST" action="index.php">
+                    <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt...">
+                    <input type="submit" value="Wyszukaj">
+                </form>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="img/basket.png">
+                </a>
+            </li>
+        </ul>
+ 
+    </header>
+    <main>
+        <div class="left">
+            <h2 class="shop disable-selection">Ten Sklep</h2>
+            <ul class="lista" > 
+                <li class="disable-selection liststylenone" onclick="products()"> Produkty</li>
+                <ul class="lista">
+                    <li class="products disable disable-selection"><a href="laptop.php">Laptopy</a></li>
+                    <li class="products disable disable-selection"><a href="pc.php">Komputery</a></li>
+                    <li class="products disable disable-selection"><a href="#">Akcesoria</a></li>
+                    <li class="products disable disable-selection"><a href="#">Telefony</a></li>
+                    <li class="products disable disable-selection"><a href="#">Routery</a></li>
+                    <li class="products disable disable-selection"><a href="#">Konsole</a></li>
+                </ul>
+            </ul>
+            <ul class="lista">
+                <li class="disable-selection liststylenone" onclick="usluga()"> Usługi</li>
+                <ul class="lista">
+                    <li class="usluga disable disable-selection"><a href="#">Zamówienia</a></li>
+                    <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
+                    <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
+                    <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
+                </ul>
+            </ul>
+            <ul class="lista">
+                <li class="disable-selection liststylenone" onclick="actual()"> Aktualności</li>
+                <ul class="lista">
+                    <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
+                    <li class="actual disable disable-selection"><a href="#">Nasz sklep</a></li>
+                    <li class="actual disable disable-selection"><a href="#">Benchmark</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="right-top">
+                <h3 class="disable-selection">
+                    TechKom > Ten Sklep > Strona Główna
+                </h3>
+            </div>
+            <div class="right-bottom">
+                <div class="right-left">
+                    <h2>
+                        Najpopularniejsze
+                    </h2>
+
+                    <?php
+                    $sql = " SELECT * FROM produkty ORDER BY popularity desc LIMIT 3";
+                    if($result = $conn->query($sql)){
+                        while($row=$result->fetch_assoc()) 
+		                {
+                            echo '<div class="popular-post"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
+                            echo '<div class="addbasket disable-selection"> <a href="#">Dodaj do koszyka</a> </div> </div> </div>';
+		                }
+                    }
+                    else{
+                        echo "Nie odczytano żadnych danych";
+                    }
+                    ?>
+                </div>
+                <div class="right-right">
+                    
+                    <h2>
+                        Najnowsze
+                    </h2>
+                    <?php
+                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT 5";
+                    if($result = $conn->query($sql)){
+                        while($row=$result->fetch_assoc()) 
+		                {
+                            echo '<div class="suggest-post"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> </div> </div> </div>';
+		                }
+                    }
+                    else{
+                        echo "Nie odczytano żadnych danych";
+                    }
+                    ?>                
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h2>
+            <MARQUEE>
+                Oficjalna strona sklepu interenetowego©
+            </MARQUEE>
+        </h2>
+    </footer>
+</body>
+</html>
