@@ -5,12 +5,11 @@ function list(a){
         element.classList.toggle("disable");
     }
 }
-function filtr(){
-    var filtr = document.getElementsByClassName("filtr")[0];
-    filtr.classList.toggle("disable");
-}
 function category(a){
     window.location.href= "ofert.php?category=" +a;
+}
+function remove(a){
+    window.location.href= "remove.php?prod=" +a;
 }
 
 
