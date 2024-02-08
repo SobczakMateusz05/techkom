@@ -47,7 +47,7 @@
                 </form>
             </li>
             <li>
-                <a href="#">
+                <a href="cart.php">
                     <img src="img/basket.png">
                 </a>
             </li>
@@ -101,15 +101,31 @@
                     <div class="buttons-option">
                         <?php
                         if($_GET["category"]=="komputery"||$_GET["category"]=="laptopy"){
-                            echo '<h3 class="disable-selection button" onclick="filtr()">Filtrowanie</h3>
+                            echo '<h3 class="disable-selection button" onclick="list('."'filtr'".')">Filtrowanie</h3>
                             <img src="img/matrixpills.png">';
                         }
                         ?>
                         <form   method="POST" action="ofert.php?category=<?php echo $_GET["category"];?>">
                             <select name="sort" onchange="this.form.submit()" class="button">
                                 <option>Wybierz typ sortowania...</option>
-                                <option value="1">Od najniższej ceny</option>
-                                <option value="2">Od najwyższej ceny</option>
+                                <option value="1"
+                                <?php
+                                if(isset($_POST["sort"])){
+                                    if($_POST["sort"]=="1"){
+                                        echo 'selected="selected"';
+                                    }
+                                }
+                                ?>
+                                >Od najniższej ceny</option>
+                                <option value="2"
+                                <?php
+                                if(isset($_POST["sort"])){
+                                    if($_POST["sort"]=="2"){
+                                        echo 'selected="selected"';
+                                    }
+                                }
+                                ?>
+                                >Od najwyższej ceny</option>
                             </select>
                             <noscript><input type="submit" name="submit" value="sort"></noscript>
                         </form>

@@ -45,9 +45,9 @@
                     <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt... (efekt stylistyczny)">
                     <input type="submit" value="Wyszukaj">
                 </form>
-            </li>>
+            </li>
             <li>
-                <a href="#">
+                <a href="cart.php">
                     <img src="img/basket.png">
                 </a>
             </li>

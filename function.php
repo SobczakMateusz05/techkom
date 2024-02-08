@@ -1,6 +1,5 @@
 <?php 
 Function products($conn){
-    
     $sql="SELECT nazwa from type";
     if($result=$conn->query($sql)){
         while($row=$result->fetch_assoc()){
