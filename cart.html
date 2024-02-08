@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/styleprod.css">
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/stylecart.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <title>Sklep internetowy</title>
@@ -26,7 +26,7 @@
                 
             </li>
             <li>
-                <a href="products.php" class="active">Produkty</a>
+                <a href="products.php" >Produkty</a>
             </li>
             <li>
                 
@@ -47,7 +47,7 @@
                 </form>
             </li>
             <li>
-                <a href="#">
+                <a href="cart.php">
                     <img src="img/basket.png">
                 </a>
             </li>
@@ -89,10 +89,41 @@
                 </h3>
             </div>
             <div class="right-bottom">
-
                     <h2>
                         Koszyk
                     </h2>
+                    <div class="cart">
+                        <div class="element">
+                            <div class="product">
+                                <img src="img/piesek.jpg">
+                                <h3>PIESEK SUPER SŁODKI POZDRO</h3>
+                            </div>
+                            <div class="options">
+                                <h3 class="price">1550,50 zł</h3>
+                                <form method="POST" action="cart.html">
+                                    <input type="number" min="1" max="10" step="1" value="1" class="amount">
+                                </form>
+                                <h3 class="delete disable-selection" onclick="remove('')">USUŃ</h3>
+                            </div>
+                        </div>
+                        <div class="element">
+                            <div class="product">
+                                <img src="img/piesek.jpg">
+                                <h3>PIESEK SUPER SŁODKI POZDRO</h3>
+                            </div>
+                            <div class="options">
+                                <h3 class="price">1552 zł</h3>
+                                <form method="POST" action="cart.html">
+                                    <input type="number" min="1" max="10" step="1" value="1" class="amount">
+                                </form>
+                                <h3 class="delete disable-selection" onclick="remove('')">USUŃ</h3>
+                            </div>
+                        </div>
+                        <div class="sum">
+                            <h3>Łączna kwota: 3101 zł</h3>
+                        </div>
+                        <h3 class="empty">TWÓJ KOSZYK JEST PUSTY</h3>
+                    </div>
             </div>
         </div>
     </main>
