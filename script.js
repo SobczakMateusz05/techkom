@@ -8,9 +8,10 @@ function list(a){
 function category(a){
     window.location.href= "ofert.php?category=" +a;
 }
-function remove(a){
-    window.location.href= "remove.php?prod=" +a;
+function operation(a,b){
+    window.location.href= "order.php?prod=" +a +"&operation="+b;
 }
+
 
 
 
