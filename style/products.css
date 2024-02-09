@@ -28,6 +28,7 @@
 .suggest-post img{
     border-radius: 15px;
     height: 100px;
+    width: 133px;
     border: black solid 2px;
 }
 .suggest-post img:hover{
