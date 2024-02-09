@@ -9,8 +9,11 @@ function category(a){
     window.location.href= "ofert.php?category=" +a;
 }
 function operation(a,b){
-    window.location.href= "order.php?prod=" +a +"&operation="+b;
+    window.location.href= "operation.php?prod=" +a +"&operation="+b;
 }
+
+
+
 
 
 
