@@ -59,3 +59,42 @@
     text-align: center;
     color: red;
 }
+.order{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    align-self: center;
+}
+.order h2{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+}
+.order h3{
+    padding: 10px;
+}
+.order input[type=text]{
+    width: 100%;
+}
+.order div input[type=radio]{
+    cursor: pointer;
+}
+.max{
+    width: 100%;
+}
+.order input, .order h4, .padding{
+    padding: 3px;
+}
+.order input[type=submit]{
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 17px;
+    border: 2px black solid;
+}
+.order input[type=submit]:hover{
+    opacity: 85%;
+    box-shadow: black 3px 3px 7px;
+    cursor: pointer;
+}
