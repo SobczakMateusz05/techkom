@@ -95,7 +95,7 @@
                     </h2>
                     <div class="items">
                         <?php
-                        $sql = "SELECT nazwa, image FROM type";
+                        $sql = "SELECT nazwa, imaget FROM type";
                         if($result=$conn->query($sql)){
                             while($row=$result->fetch_assoc()){
                                 
