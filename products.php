@@ -95,12 +95,12 @@
                     </h2>
                     <div class="items">
                         <?php
-                        $sql = "SELECT nazwa FROM type";
+                        $sql = "SELECT nazwa, image FROM type";
                         if($result=$conn->query($sql)){
                             while($row=$result->fetch_assoc()){
                                 
                                 echo '<a href="#" onclick="category('."'".$row["nazwa"]."'".')" class="suggest-post">';
-                                echo '<img src="img/piesek.jpg">';
+                                echo '<img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                                 echo '<h3 class="disable-selection">'. UCWORDS($row["nazwa"]).'</h3></a>';
                             }
                         }
