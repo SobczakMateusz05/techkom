@@ -95,15 +95,18 @@
                     </h2>
                     <div class="cart">
                     <?php
-                        $sql = "SELECT p.name, p.id, p.image, p.price, c.amount, sum(p.price) as suma from cart as c join produkty as p on c.id=p.id where p.id is not null";
+                        $sql = "SELECT p.name, p.id, p.image, p.price, c.amount from cart as c join produkty as p on c.id=p.id";
                         if($result=$conn->query($sql)){
-                            $num_row=mysqli_num_rows($result);
                             $row=$result->fetch_assoc();
-                            if($row["id"]>=1){
-                                cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"], $row["suma"]);
+                            $sum=0;
+                            if(@$row["id"]>=1){
+                                cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"]);
+                                $sum+=$row["price"]*$row["amount"];
                                 while($row=$result->fetch_assoc()){
-                                    cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"], $row["suma"]);
+                                    cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"]);
+                                    $sum+=$row["price"]*$row["amount"];
                                 }
+                                echo '<div class="sum"><h3>Łączna kwota: '.$sum.' zł</h3></div>';
                                 $set=53;
                             }
                             else{

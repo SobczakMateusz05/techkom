@@ -83,6 +83,27 @@
             </ul>
         </div>
         <div class="right">
+            <div class="
+            <?php
+                if(isset($_GET["add"])){
+                    echo 'added'; 
+                }
+                else{
+                    echo 'disable';
+                }
+            ?>
+            ">
+                <h2>Dodano produkt do koszyka</h2>
+                <div class="flex">
+                    <a href="#" class="button2" onclick=
+                    <?php
+                        echo '"category('."'".$_GET["category"]."'" .')"';
+                    ?>
+                    >
+                    Kontunnuj zakupy</a>
+                    <a href="cart.php" class="button2">Przejdź do koszyka</a>
+                </div>
+            </div>
             <div class="right-top">
                 <h3 class="disable-selection">
                     TechKom > Ten Sklep > Produkty > 
@@ -177,28 +198,28 @@
                     </div>
                     <?php
                     $category=$_GET["category"];
-                    $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
+                    $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
 
                     if(isset($_POST["submit"])){
                         $ram=$_POST["ram"];
                         $proc=$_POST["proc"];
                         if($ram!=0&&$proc!=0){
-                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram' and p.procesor='$proc'";
+                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram' and p.procesor='$proc'";
                         }
                         if($ram!=0&&$proc==0){
-                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram'";
+                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram'";
                         }
                         if($ram==0&&$proc!=0){
-                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.procesor='$proc'";
+                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.procesor='$proc'";
                         }
                         
                     }
                     if(isset($_POST["sort"])){
                         if($_POST["sort"]==1){
-                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price ASC";
+                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price ASC";
                         }
                         if($_POST["sort"]==2){
-                            $sql = " SELECT * FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price DESC";
+                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price DESC";
                         }
                     }
                     
@@ -209,7 +230,8 @@
 		                    {
                                 echo '<div class="popular-post"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                                 echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                                echo '<div class="addbasket disable-selection"> <a href="#">Dodaj do koszyka</a> </div> </div> </div>';
+                                echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'add'".')"';
+                                echo '>Dodaj do koszyka</a> </div> </div> </div>';
 		                    }
                         }
                         else{
