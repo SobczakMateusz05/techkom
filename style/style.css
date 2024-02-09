@@ -100,7 +100,7 @@ main{
     margin-left: 25px;
 }
 .disable{
-    display: none;
+    display: none!important;
 }
 
 .left h2{
