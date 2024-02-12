@@ -93,15 +93,24 @@
                 }
             ?>
             ">
-                <h2>Dodano produkt do koszyka</h2>
-                <div class="flex">
-                    <a href="#" class="button2" onclick=
+            <div class="border2">
                     <?php
-                        echo '"category('."'".$_GET["category"]."'" .')"';
+                        if(isset($_GET["add"])&&$_GET["add"]=="yes"){
+                            echo '<h2 style="color: green;">Dodano produkt do koszyka!</h2>';
+                        }
+                        else{
+                            echo '<h2 style="color: red;">Maksymalna ilość tego przedmiotu w koszyku!</h2>';
+                        }
                     ?>
-                    >
-                    Kontunnuj zakupy</a>
-                    <a href="cart.php" class="button2">Przejdź do koszyka</a>
+                    <div class="flex">
+                        <a href="#" class="button2" onclick=
+                        <?php
+                            echo '"category('."'".$_GET["category"]."'" .')"';
+                        ?>
+                        >
+                        Kontunnuj zakupy</a>
+                        <a href="cart.php" class="button2">Przejdź do koszyka</a>
+                    </div>
                 </div>
             </div>
             <div class="right-top">
