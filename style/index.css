@@ -39,8 +39,7 @@
 .added{
     position: absolute;
     background: black;
-    padding: 40px;
-    border: white solid 2px;
+    padding: 10px;
     border-radius: 17px;
     text-align: center;
     display: flex;
@@ -95,6 +94,7 @@
 }
 .popular-post p{
     padding-left: 15px;
+    padding-right: 10px;
 }
 .in{
     display: flex;
@@ -152,4 +152,14 @@
     opacity: 85%;
     cursor: pointer;
     box-shadow: black 3px 3px 7px;
+}
+.border2{
+    border: white 2px dashed;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-radius: 17px;
 }
