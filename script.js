@@ -11,10 +11,3 @@ function category(a){
 function operation(a,b){
     window.location.href= "operation.php?prod=" +a +"&operation="+b;
 }
-
-
-
-
-
-
-
