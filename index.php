@@ -83,6 +83,22 @@
             </ul>
         </div>
         <div class="right">
+        <div class="
+            <?php
+                if(isset($_GET["add"])){
+                    echo 'added'; 
+                }
+                else{
+                    echo 'disable';
+                }
+            ?>
+            ">
+                <h2>Dodano produkt do koszyka</h2>
+                <div class="flex">
+                    <a href="index.php" class="button2">Kontunnuj zakupy</a>
+                    <a href="cart.php" class="button2">Przejdź do koszyka</a>
+                </div>
+            </div>
             <div class="right-top">
                 <h3 class="disable-selection">
                     TechKom > Ten Sklep > Strona Główna
@@ -99,9 +115,10 @@
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
-                            echo '<div class="popular-post"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="popular-post"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                             echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                            echo '<div class="addbasket disable-selection"> <a href="#">Dodaj do koszyka</a> </div> </div> </div>';
+                            echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'addindex'".')"';
+                            echo '>Dodaj do koszyka</a> </div> </div> </div>';
 		                }
                     }
                     else{
