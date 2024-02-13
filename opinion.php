@@ -95,7 +95,7 @@
                 </h2>
                 <h4>Średnia opnii:
                     <?php
-                    $sql="SELECT Avg(rating) as avg from rewiews";
+                    $sql="SELECT ROUND(Avg(rating), 2) as avg from rewiews";
                     $result=$conn->query($sql);
                     $row=$result->fetch_assoc();
                     echo $row["avg"];
