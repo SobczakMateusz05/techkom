@@ -1,5 +1,3 @@
-
-    <div 
-    <?php echo 'style="background: url('."'img/piesek.jpg'". ') no-repeat; height: 100px; display:flex;"';
+<?php
+    echo date('d-m-Y', time());
 ?>
-></div>
