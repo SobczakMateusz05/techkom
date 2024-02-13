@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2024 at 10:58 PM
+-- Generation Time: Feb 13, 2024 at 11:51 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -286,12 +286,12 @@ INSERT INTO `rewiews` (`id`, `username`, `date`, `review`, `rating`) VALUES
 (24, 'Michał B', '2019-08-15', 'Obsługa z wydajnością 3 klientów na 30 minut przy pracy 5 stanowisk, hit... stworzenie dedykowanego miejsca do przyjmowania zamówień... banda idiotów na stanowiskach kierowniczych', 1.5),
 (25, 'Bosiek PIO', '2020-06-02', 'Sprzedażowo firma w porządku, jednak jestem w trakcie reklamacji produktu i pierwsze podejście było negatywne (karta graficzna wyraźnie wymaga wymiany termopadów w pamięci) i wygląda na to, że obsługa niewiele dała wysiłek. A więc sprzedaż plus serwis, hmm.\nPróby sprzedaży dodatkowych produktów typu Cross-Selling nieco spowalniają usługę (jak ma to miejsce w przypadku większości firm tego typu).\nNiedawno sprzedawca dokonał cudu, zachęcając dwie młode dziewczyny do wykupienia dodatkowego ubezpieczenia przy zakupie iPhone\'a – myślę, że dotarcie do kasy zajęło im około piętnastu minut.', 3),
 (26, 'Kasia Uran-335', '2019-11-20', 'Czas temu odebrałem tablet, a ostatni raz z chłopakiem złożyłem reklamację. Wszyscy panowie zawsze są bardzo mili i pomocni. Mój ulubiony salon ze sprzętem elektronicznym, na pewno będę wracać. :)', 5),
-(27, 'Złoty', '2022-11-07', 'Duży sklep, szeroki wybór produktów\r\nJednak czas oczekiwania na otrzymanie zamówienia internetowego jest zdecydowanie za długi.', NULL),
-(28, 'MęczennikSystemu', '2018-08-01', 'Wracając do czasów, które słusznie już minęły, po co mieć numery, a obsługa i tak idzie jedna po drugiej, na odbiór zamówienia czeka się prawie godzinę, poza tym, że w tej godzinie pracownicy ciągle gdzieś znikali i mimo praktycznie 6 stanowisk jednocześnie, w rzeczywistości były to tylko 4 stanowiska jednocześnie, przez większość czasu 3. Weź numer i idź na zakupy', NULL),
-(29, 'Kaalion', '2022-01-25', 'Niedawno odwiedziłem salon, aby odebrać zamówienie i jestem bardzo zadowolony. Obsługa na wysokim poziomie, zarówno profesjonalnym, jak i kulturalnym. Obsługiwał mnie bardzo miły Pan Piotr, który wykonał świetną robotę, nie mam żadnych zastrzeżeń :)', NULL),
-(30, 'Karyna', '2024-02-17', 'Straszna obsługa, szczerze polecam każdy inny sklep niż ten. Obsługa zachowuje się jak po kilkudniowej imprezie, może nawet zrobić sobie przerwę na rozmowę.', NULL),
-(31, 'Patrycja Rogowieeec', '2016-04-14', 'Zamówienie zostało złożone pod koniec miesiąca z zapewnieniem, że zostanie dostarczone i zafakturowane do ostatniego dnia miesiąca. Niestety po wielu interwencjach dostawa została zrealizowana w następnym miesiącu, co oznacza, że ​​klient otrzymuje obietnice jedynie złożenia zamówienia, a następnie zostaje odrzucony', NULL),
-(32, 'BAJO JAJO', '2015-05-20', 'Muszę przyznać, że poziom szybkości obsługi klientów oraz kwestia oczekiwania na swoją kolej zawstydziła afrykańskich wykonawców dróg i nigeryjską służbę zdrowia. Uświadomiono mi, że „korki” w Afryce to nic. Pozdrowienia.', NULL);
+(27, 'Złoty', '2022-11-07', 'Duży sklep, szeroki wybór produktów\nJednak czas oczekiwania na otrzymanie zamówienia internetowego jest zdecydowanie za długi.', 3),
+(28, 'MęczennikSystemu', '2018-08-01', 'Wracając do czasów, które słusznie już minęły, po co mieć numery, a obsługa i tak idzie jedna po drugiej, na odbiór zamówienia czeka się prawie godzinę, poza tym, że w tej godzinie pracownicy ciągle gdzieś znikali i mimo praktycznie 6 stanowisk jednocześnie, w rzeczywistości były to tylko 4 stanowiska jednocześnie, przez większość czasu 3. Weź numer i idź na zakupy', 1.5),
+(29, 'Kaalion', '2022-01-25', 'Niedawno odwiedziłem salon, aby odebrać zamówienie i jestem bardzo zadowolony. Obsługa na wysokim poziomie, zarówno profesjonalnym, jak i kulturalnym. Obsługiwał mnie bardzo miły Pan Piotr, który wykonał świetną robotę, nie mam żadnych zastrzeżeń :)', 5),
+(30, 'Karyna', '2024-02-17', 'Straszna obsługa, szczerze polecam każdy inny sklep niż ten. Obsługa zachowuje się jak po kilkudniowej imprezie, może nawet zrobić sobie przerwę na rozmowę.', 1),
+(31, 'Patrycja Rogowieeec', '2016-04-14', 'Zamówienie zostało złożone pod koniec miesiąca z zapewnieniem, że zostanie dostarczone i zafakturowane do ostatniego dnia miesiąca. Niestety po wielu interwencjach dostawa została zrealizowana w następnym miesiącu, co oznacza, że ​​klient otrzymuje obietnice jedynie złożenia zamówienia, a następnie zostaje odrzucony', 1),
+(32, 'BAJO JAJO', '2015-05-20', 'Muszę przyznać, że poziom szybkości obsługi klientów oraz kwestia oczekiwania na swoją kolej zawstydziła afrykańskich wykonawców dróg i nigeryjską służbę zdrowia. Uświadomiono mi, że „korki” w Afryce to nic. Pozdrowienia.', 1);
 
 -- --------------------------------------------------------
 
