@@ -26,4 +26,9 @@ Function cartitem($image, $name, $price, $amount, $id){
     echo '<h3 class="delete disable-selection" onclick="operation('.$id. " ,'del')";
     echo '">USUŃ</h3></div></div>';
 }
+Function scale(){
+    for($i=1; $i<=5; $i+=0.5){
+        echo '<option value="'. $i.'">'.$i. "</option>"; 
+    }
+}
 ?>
