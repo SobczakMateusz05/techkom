@@ -17,3 +17,26 @@
     text-align: end;
     font-weight: lighter;
 }
+.right-top a{
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 17px;
+    border: 2px black solid;
+    text-decoration: none;
+    color: black;
+    background: #F0F0F0;
+}
+.right-top a:hover{
+    opacity: 85%;
+    box-shadow: black 3px 3px 7px;
+    cursor: pointer;
+}
+.topop{
+    display: flex;
+    justify-content: space-around;
+}
+h4{
+    text-align: center;
+}
