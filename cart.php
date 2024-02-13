@@ -142,10 +142,10 @@
                         <h3>Wybierz rodzaj dostawy:</h3>
                         <div>
                             <?php
-                            $sql= "SELECT name, image, cost from delivery";
+                            $sql= "SELECT id, name, image, cost from delivery";
                             if($result=$conn->query($sql)){
                                 while($row=$result->fetch_assoc()){
-                                    echo '<div class="padding"><input type="radio" name="delivery" required>';
+                                    echo '<div class="padding"><input type="radio" name="delivery" required value="'. $row['id'].'">';
                                     echo '<img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                                     echo $row["name"] . " - " . $row["cost"] ." zł </div>";
                                 }
@@ -158,6 +158,10 @@
                             <input type="text" required name="imie" placeholder="Wprowadź imię">
                             <h4>Nazwisko:</h4>
                             <input type="text" required name="nazwisko"placeholder="Wprowadź nazwisko">
+                            <h4>Numer telefonu(format:123456789):</h4>
+                            <input type="tel" required name="tel" pattern="[0-9]{9}" placeholder="Wprowadź numer telefonu">
+                            <h4>Adres e-mail:</h4>
+                            <input type="mail" required name="mail" placeholder="Wprowadź adres e-mail">
                             <h4>Ulica:</h4>
                             <input type="text" required name="ulica" placeholder="Wprowadź ulice">
                             <h4>Numer domu:</h4>
@@ -169,17 +173,17 @@
                         <h3>Wybierz formę płatności:</h3>
                         <div>
                             <?php
-                                $sql="SELECT image, method from payments";
+                                $sql="SELECT id, image, method from payments";
                                 if($result=$conn->query($sql)){
                                     while($row=$result->fetch_assoc()){
-                                        echo '<div class="padding"><input type="radio" name="pay" required>';
+                                        echo '<div class="padding"><input type="radio" name="pay" required value="'. $row['id'].'">';
                                         echo '<img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                                         echo $row["method"] . "</div>";
                                     }
                                 }
                             ?>
                         </div>
-                        <input type="submit" value="Zamów i przejdź do podumowania">
+                        <input type="submit" value="Zamów i przejdź do podumowania" name="send">
                     </form>
             </div>
         </div>
