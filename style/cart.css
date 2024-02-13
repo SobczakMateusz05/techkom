@@ -84,6 +84,8 @@
 }
 .order input, .order h4, .padding{
     padding: 3px;
+    display: flex;
+    align-items: center;
 }
 .order input[type=submit]{
     padding: 10px;
@@ -97,4 +99,7 @@
     opacity: 85%;
     box-shadow: black 3px 3px 7px;
     cursor: pointer;
+}
+.padding img{
+    max-width: 60px;
 }

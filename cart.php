@@ -8,11 +8,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/stylecart.css">
+    <link rel="stylesheet" href="style/cart.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <title>Sklep internetowy</title>
     <script src="script.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcchnApAAAAAIvWz1qZKS1y798KNZxHieP0mQ9J"></script>
+    <script>
+                          function onClick(e) {
+                            e.preventDefault();
+                            grecaptcha.enterprise.ready(async () => {
+                              const token = await grecaptcha.enterprise.execute('6LcchnApAAAAAIvWz1qZKS1y798KNZxHieP0mQ9J', {action: 'LOGIN'});
+                            });
+                          }
+                        </script>
 </head>
 <body>
     <header>
@@ -132,9 +141,16 @@
                         <h2>Rodzaj i adres dostawy</h2>
                         <h3>Wybierz rodzaj dostawy:</h3>
                         <div>
-                            <div class="padding"><input type="radio" name="delivery" required>Kurier DPD - 22,50zł </div>
-                            <div class="padding"><input type="radio" name="delivery" required>Kurier DPD - ł </div>
-                            <div class="padding"><input type="radio" name="delivery" required>Kurier DPD - 22,50zł </div>
+                            <?php
+                            $sql= "SELECT name, image, cost from delivery";
+                            if($result=$conn->query($sql)){
+                                while($row=$result->fetch_assoc()){
+                                    echo '<div class="padding"><input type="radio" name="delivery" required>';
+                                    echo '<img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                                    echo $row["name"] . " - " . $row["cost"] ." zł </div>";
+                                }
+                            }
+                            ?>
                         </div>
                         <h3>Adres dostawy:</h3>
                         <div class="max">
@@ -152,9 +168,16 @@
                         <h2>Forma Płatności</h2>
                         <h3>Wybierz formę płatności:</h3>
                         <div>
-                            <div class="padding"><input type="radio" name="pay" required>Kurier DPD - 22,50zł </div>
-                            <div class="padding"><input type="radio" name="pay" required>Kurier DPD - 22,50zł </div>
-                            <div class="padding"><input type="radio" name="pay" required>Kurier DPD - 22,50zł </div>
+                            <?php
+                                $sql="SELECT image, method from payments";
+                                if($result=$conn->query($sql)){
+                                    while($row=$result->fetch_assoc()){
+                                        echo '<div class="padding"><input type="radio" name="pay" required>';
+                                        echo '<img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                                        echo $row["method"] . "</div>";
+                                    }
+                                }
+                            ?>
                         </div>
                         <input type="submit" value="Zamów i przejdź do podumowania">
                     </form>
