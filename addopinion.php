@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/opinion.css">
+    <link rel="stylesheet" href="style/addopinion.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <title>Sklep internetowy</title>
     <script src="script.js"></script>
@@ -87,34 +87,48 @@
                 <h3 class="disable-selection">
                     TechKom > Ten Sklep > Usługi > Opinie
                 </h3>
-                <a href="addopinion.php">Dodaj opinie</a>
             </div>
             <div class="right-bottom">
-                <h2>
-                    Opinie
-                </h2>
-                <h4>Średnia opnii:
-                    <?php
-                    $sql="SELECT Avg(rating) as avg from rewiews";
-                    $result=$conn->query($sql);
-                    $row=$result->fetch_assoc();
-                    echo $row["avg"];
-                    ?>
-                / 5</h4>
+                <form method="POST" action="addopinion.php" class="
                 <?php
-                    $sql = " SELECT * FROM rewiews";
-                    if($result = $conn->query($sql)){
-                        while($row=$result->fetch_assoc()) 
-                        {
-                            echo '<div class="opinion"> <div class="topop"><h2></h2><h2>'. $row['username']. '</h2><h2>'; 
-                            echo $row["rating"]. '/ 5</h2></div> <h3>';
-                            echo  $row['review']. '</h3> <h5> Data dodania: '. $row['date']. ' </h5> </div>';
-                        }
-                    }
-                    else{
-                        echo "Nie znaleziono żadnych opinii";
+                    if(isset($_POST["send"])){
+                        echo "disable";
                     }
                 ?>
+                ">
+                    <h1>Dodaj opinie</h1>
+                    <h3>Twoja nazwa:</h2>
+                    <input type="text" name="nick" required placeholder="Wprowadź nazwę użytkownika">
+                    <h3>Treść opinii:</h2>
+                    <textarea name="opinion" cols="40" rows="5" required></textarea>
+                    <h3>Twoja ocena:</h2>
+                    <select name="mark" required>
+                    <?php
+                        scale();
+                    ?>
+                    </select>
+                    <input type="submit" value="Dodaj opinie" name="send">
+                </form>
+                <div class="
+                <?php
+                    if(empty($_POST["send"])){
+                        echo "disable";
+                    }
+                    else{
+                        $user = $_POST["nick"];
+                        $date=date('Y-m-d', time());
+                        $opinion=$_POST["opinion"];
+                        $rating=$_POST["mark"];
+
+                        $sql= "INSERT INTO rewiews(username,date, review, rating) values ('$user','$date','$opinion','$rating')";
+                        $result=$conn->query($sql);
+                    }
+                ?>
+                ">
+                    <h1 style="color: green;">Pomyślnie dodano opinie</h1>
+                    <img src="img/check_mark.gif">
+                    <a href="opinion.php">Wróć do opinii</a>
+                </div>
             </div>
         </div>
     </main>
