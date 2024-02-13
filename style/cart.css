@@ -73,7 +73,7 @@
 .order h3{
     padding: 10px;
 }
-.order input[type=text]{
+.order input[type=text], .order input[type=tel], .order input[type=mail]{
     width: 100%;
 }
 .order div input[type=radio]{
