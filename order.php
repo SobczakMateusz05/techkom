@@ -1,9 +1,9 @@
 <?php
     require_once "connect.php";
     require_once "function.php";
-    //if(empty($_POST["send"])){
-    //    header('Location: index.php');
-    //}
+    if(empty($_POST["send"])){
+        header('Location: index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -80,7 +80,7 @@
                 <li class="disable-selection liststylenone" onclick="list('actual')"> Aktualności</li>
                 <ul class="lista">
                     <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
-                    <li class="actual disable disable-selection"><a href="#">Nasz sklep</a></li>
+                    <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
                     <li class="actual disable disable-selection"><a href="#">Benchmark</a></li>
                 </ul>
             </ul>
