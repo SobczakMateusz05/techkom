@@ -152,7 +152,8 @@
                     else{
                         echo "Nie odczytano żadnych danych";
                     }
-                    ?>                
+                    ?>  
+                    <img src="img/addR.png" class="ad">              
                 </div>
             </div>
         </div>
