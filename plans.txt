@@ -1,5 +1,5 @@
 szczegóły przedmiotów;
-opinia w skali 1/10;
-średnia opinii w skali 1/10;
+opinia w skali 1/5;
+średnia opinii w skali 1/5;
 dodawanie opinii;
-składanie zamówienia;
+wyświetlanie historii zamówień;
