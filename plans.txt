@@ -1,3 +1,10 @@
 szczegóły przedmiotów;
 wyświetlanie historii zamówień;
 dodać reklamę na stronie głównej;
+
+
+OPCJONALNIE:
+
+Formularz reklamacji;
+Oferta serwisowa;
+Promocje;
