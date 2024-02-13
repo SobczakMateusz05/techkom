@@ -77,7 +77,7 @@
                 <li class="disable-selection liststylenone" onclick="list('actual')"> Aktualności</li>
                 <ul class="lista">
                     <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
-                    <li class="actual disable disable-selection"><a href="#">Nasz sklep</a></li>
+                    <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
                     <li class="actual disable disable-selection"><a href="#">Benchmark</a></li>
                 </ul>
             </ul>
@@ -87,17 +87,28 @@
                 <h3 class="disable-selection">
                     TechKom > Ten Sklep > Usługi > Opinie
                 </h3>
+                <a href="addopinion.php">Dodaj opinie</a>
             </div>
             <div class="right-bottom">
                 <h2>
                     Opinie
                 </h2>
+                <h4>Średnia opnii:
+                    <?php
+                    $sql="SELECT Avg(rating) as avg from rewiews";
+                    $result=$conn->query($sql);
+                    $row=$result->fetch_assoc();
+                    echo $row["avg"];
+                    ?>
+                / 5</h4>
                 <?php
                     $sql = " SELECT * FROM rewiews";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
                         {
-                            echo '<div class="opinion"> <h2>'. $row['username']. '</h2> <h3>'. $row['review']. '</h3> <h5> Data dodania: '. $row['date']. '</h5> </div>';
+                            echo '<div class="opinion"> <div class="topop"><h2></h2><h2>'. $row['username']. '</h2><h2>'; 
+                            echo $row["rating"]. '/ 5</h2></div> <h3>';
+                            echo  $row['review']. '</h3> <h5> Data dodania: '. $row['date']. ' </h5> </div>';
                         }
                     }
                     else{

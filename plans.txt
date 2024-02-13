@@ -1,5 +1,10 @@
 szczegóły przedmiotów;
-opinia w skali 1/5;
-średnia opinii w skali 1/5;
-dodawanie opinii;
 wyświetlanie historii zamówień;
+dodać reklamę na stronie głównej;
+
+
+OPCJONALNIE:
+
+Formularz reklamacji;
+Oferta serwisowa;
+Promocje;
