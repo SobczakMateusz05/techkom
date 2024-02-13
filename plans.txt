@@ -1,2 +1,3 @@
 szczegóły przedmiotów;
 wyświetlanie historii zamówień;
+dodać reklamę na stronie głównej;
