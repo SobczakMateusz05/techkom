@@ -112,7 +112,7 @@
                     <h3>Twoja nazwa:</h2>
                     <input type="text" name="nick" required placeholder="Wprowadź nazwę użytkownika" 
                     <?php 
-                    if(isset($_SESSION["user"])){
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                         $id=$_SESSION["user"];
                         $sql = "SELECT name from user where id=$id";
                         $result=$conn->query($sql);
