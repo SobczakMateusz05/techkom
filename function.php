@@ -31,4 +31,10 @@ Function scale(){
         echo '<option value="'. $i.'">'.$i. "</option>"; 
     }
 }
+Function historyitem($image, $name, $price, $amount){
+    echo '<div class="element"><div class="product"><img src="data:image/jpg;charset=utf8;base64,'.base64_encode($image).'" /><h3>';
+    echo $name. '</h3></div><div class="options"><h3 class="price">'. $price. ' zł';
+    echo '</h3>';
+    echo "<h3> x $amount </h3></div></div>";
+}
 ?>
