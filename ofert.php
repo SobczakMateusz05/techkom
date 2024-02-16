@@ -1,6 +1,9 @@
 <?php
     require_once "connect.php";
     require_once "function.php";
+    if(empty($_GET["category"])){
+        header('Location:index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -67,8 +70,8 @@
             <ul class="lista">
                 <li class="disable-selection liststylenone" onclick="list('usluga')"> Usługi</li>
                 <ul class="lista">
-                    <li class="usluga disable disable-selection"><a href="#">Zamówienia</a></li>
-                    <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
+                    <li class="usluga disable disable-selection"><a href="orderhistory.php">Zamówienia</a></li>
+                    <li class="usluga disable disable-selection"><a href="ofert.php?category=serwis">Serwis</a></li>
                     <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
                     <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
                 </ul>
@@ -84,16 +87,16 @@
         </div>
         <div class="right">
             <div class="
-            <?php
-                if(isset($_GET["add"])){
-                    echo 'added'; 
-                }
-                else{
-                    echo 'disable';
-                }
-            ?>
+                <?php
+                    if(isset($_GET["add"])){
+                        echo 'added'; 
+                    }
+                    else{
+                        echo 'disable';
+                    }
+                ?>
             ">
-            <div class="border2">
+                <div class="border2">
                     <?php
                         if(isset($_GET["add"])&&$_GET["add"]=="yes"){
                             echo '<h2 style="color: green;">Dodano produkt do koszyka!</h2>';
@@ -115,8 +118,14 @@
             </div>
             <div class="right-top">
                 <h3 class="disable-selection">
-                    TechKom > Ten Sklep > Produkty > 
+                    TechKom > Ten Sklep > 
                     <?php
+                    if($_GET["category"]=="serwis"){
+                        echo "Usługi > ";
+                    }
+                    else{
+                        echo "Produkty > ";
+                    }
                     echo UCWORDS($_GET["category"]);
                     ?>
                 </h3>
@@ -131,17 +140,16 @@
                     <div class="buttons-option">
                         <?php
                         if($_GET["category"]=="komputery"||$_GET["category"]=="laptopy"){
-                            echo '<h3 class="disable-selection button" onclick="list('."'filtr'".')">Filtrowanie</h3>
-                            <img src="img/matrixpills.png">';
+                            echo '<h3 class="disable-selection button" onclick="list('."'filtr'".')">Filtrowanie</h3>';
                         }
                         ?>
-                        <form   method="POST" action="ofert.php?category=<?php echo $_GET["category"];?>">
-                            <select name="sort" onchange="this.form.submit()" class="button">
+                        <form>
+                            <select onchange="sort()" class="button" id="mySelect">
                                 <option>Wybierz typ sortowania...</option>
                                 <option value="1"
                                 <?php
-                                if(isset($_POST["sort"])){
-                                    if($_POST["sort"]=="1"){
+                                if(isset($_GET["sort"])){
+                                    if($_GET["sort"]=="1"){
                                         echo 'selected="selected"';
                                     }
                                 }
@@ -149,22 +157,28 @@
                                 >Od najniższej ceny</option>
                                 <option value="2"
                                 <?php
-                                if(isset($_POST["sort"])){
-                                    if($_POST["sort"]=="2"){
+                                if(isset($_GET["sort"])){
+                                    if($_GET["sort"]=="2"){
                                         echo 'selected="selected"';
                                     }
                                 }
                                 ?>
                                 >Od najwyższej ceny</option>
                             </select>
-                            <noscript><input type="submit" name="submit" value="sort"></noscript>
                         </form>
+                        <div class="button"
+                        <?php
+                            echo 'onclick="category('. "'" .$_GET["category"]. "'" . ')"';
+                        ?>
+                        >
+                        RESET
+                        </div>
                     </div>
                     <div class="filtr disable">
                         <h3> FILTRY</h3>
-                        <form method="POST" action="ofert.php?category=<?php echo $_GET["category"];?>" class="filtrform">
+                        <form class="filtrform">
                             <h4>Procesor: 
-                                <select name="proc">
+                                <select id="proc" onchange="filtr('proc')">
                                     <option value="0"> Wybierz procesor </option>
                                     <?php
                                         $sql="SELECT Distinct procesor FROM produkty WHERE procesor is not null ORDER BY procesor ASC";
@@ -183,7 +197,7 @@
                                 </select>
                             </h4>
                             <h4>Pamięć RAM: 
-                                <select name="ram">
+                                <select id="ram" onchange="filtr('ram')">
                                 <option value="0"> Wybierz ilość pamięci RAM</option>
                                 <?php
                                         $sql="SELECT Distinct ram FROM produkty WHERE ram is not null ORDER BY ram ASC";
@@ -202,16 +216,25 @@
                                     ?>
                                 </select>
                             </h4>
-                                <input type="submit" name="submit" value="Filtruj">
                         </form>
                     </div>
                     <?php
                     $category=$_GET["category"];
                     $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
 
-                    if(isset($_POST["submit"])){
-                        $ram=$_POST["ram"];
-                        $proc=$_POST["proc"];
+                    if(isset($_GET["ram"])||isset($_GET["proc"])||isset($_GET["ram"])&&isset($_GET["proc"])){
+                        if(isset($_GET["ram"])){
+                            $ram=$_GET["ram"];
+                        }
+                        else{
+                            $ram=0;
+                        }
+                        if(isset($_GET["proc"])){
+                            $proc=$_GET["proc"];
+                        }
+                        else{
+                            $proc=0;
+                        }
                         if($ram!=0&&$proc!=0){
                             $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram' and p.procesor='$proc'";
                         }
@@ -223,12 +246,14 @@
                         }
                         
                     }
-                    if(isset($_POST["sort"])){
-                        if($_POST["sort"]==1){
-                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price ASC";
+                    if(isset($_GET["sort"])){
+                        if($_GET["sort"]==1){
+                            $sortowanie = "ORDER BY p.price ASC";
+                            $sql = $sql . $sortowanie;
                         }
-                        if($_POST["sort"]==2){
-                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' ORDER BY p.price DESC";
+                        if($_GET["sort"]==2){
+                            $sortowanie= "ORDER BY p.price DESC";
+                            $sql = $sql . $sortowanie;
                         }
                     }
                     
@@ -237,9 +262,9 @@
                             $num_row=mysqli_num_rows($result)*2;
                             while($row=$result->fetch_assoc()) 
 		                    {
-                                echo '<div class="popular-post"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                                echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                                 echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                                echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'add'".')"';
+                                echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'add'". '); event.stopPropagation();"';
                                 echo '>Dodaj do koszyka</a> </div> </div> </div>';
 		                    }
                         }
@@ -263,7 +288,7 @@
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
-                            echo '<div class="suggest-post"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="suggest-post" onclick="spec('.$row["id"].')"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                             echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> </div> </div> </div>';
 		                }
                     }

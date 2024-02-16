@@ -1,0 +1,204 @@
+<?php
+    require_once "connect.php";
+    require_once "function.php";
+?>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/orderhistory.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+    <title>Sklep internetowy</title>
+    <script src="script.js"></script>
+</head>
+<body>
+<header>
+        <ul>
+            <li>
+
+            </li>
+            <li>
+                <a href="index.php">Stona Główna</a>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                <a href="products.php">Produkty</a>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                <a href="about.php">O nas</a>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                <a href="contact.php">Kontakt</a>
+            </li>
+            <li>
+                <form method="POST" action="index.php">
+                    <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt... (efekt stylistyczny)">
+                    <input type="submit" value="Wyszukaj">
+                </form>
+            </li>
+            <li>
+                <a href="cart.php">
+                    <img src="img/basket.png">
+                </a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <div class="left">
+            <h2 class="shop disable-selection">Ten Sklep</h2>
+            <ul class="lista" > 
+                <li class="disable-selection liststylenone" onclick="list('products')"> Produkty</li>
+                <ul class="lista">
+                    <?php
+                        products($conn);
+                    ?>
+                </ul>
+            </ul>
+            <ul class="lista">
+                <li class="disable-selection liststylenone" onclick="list('usluga')"> Usługi</li>
+                <ul class="lista">
+                    <li class="usluga disable disable-selection"><a href="orderhistory.php">Zamówienia</a></li>
+                    <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
+                    <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
+                    <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
+                </ul>
+            </ul>
+            <ul class="lista">
+                <li class="disable-selection liststylenone" onclick="list('actual')"> Aktualności</li>
+                <ul class="lista">
+                    <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
+                    <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
+                    <li class="actual disable disable-selection"><a href="#">Benchmark</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="right">
+           <div class="right-top">
+            <h3 class="disable-selection">
+                TechKom > Ten Sklep > Usługi > Zamówienia
+            </h3>
+           </div>
+           <div class="bottom-right
+            <?php
+                if(isset($_GET["number"])){
+                    echo " disable";
+                }
+                else{
+
+                }
+            ?>
+           ">
+                <div class="right-left">
+                    <?php
+                        $sql="SELECT o.number, o.date, d.cost from (orders as o join produkty as p on p.id=product) join delivery as d on o.delivery = d.id group by number order by number desc";
+                        $result=$conn->query($sql);
+                        while($row=$result->fetch_assoc()){
+                            $number=$row["number"];
+                            echo '<div class="post" onclick="history('.$row["number"].')"><img src="img/order.png"><h2>Zamówienie nr. '.$number.'</h2><h2>Kwota: ';
+                            $sql2="SELECT p.price, o.amount from orders as o join produkty as p on p.id=product WHERE number=$number";
+                            $result2=$conn->query($sql2);
+                            $sum=0;
+                            while($row2=$result2->fetch_assoc()){
+                               $sum+=$row2["price"]*$row2["amount"];
+                            }
+                            $sum+=$row["cost"];
+                            echo "$sum zł</h2><h5>Data: ". $row["date"] ."</h5></div>";
+                        }
+                    ?>
+                </div>
+                <div class="right-right">
+                    <img src="img/addR.png">
+                </div>
+            </div>
+            <div class="right-bottom
+            <?php
+                if(isset($_GET["number"])){
+                }
+                else{
+                    echo "disable";
+                }
+            ?>
+
+            ">
+                <?php
+                if(isset($_GET["number"])){
+                    $number=$_GET["number"];
+                }
+                ?>
+                <h1>Zamówienie nr. 
+                    <?php 
+                    if(isset($_GET["number"])){
+                        echo $number; 
+                    }
+                    ?></h1>
+                <div class="cart">
+                <?php
+                    if(isset($_GET["number"])){
+                        $sql = "SELECT p.name, p.image, p.price, o.amount, d.cost, o.delivery from (orders as o join produkty as p on o.product=p.id) join delivery as d on d.id=o.delivery where number=$number";
+                        if($result=$conn->query($sql)){
+                            $sum=0;
+                            while($row=$result->fetch_assoc()){
+                                historyitem($row["image"], $row["name"], $row["price"], $row["amount"]);
+                                $sum+=$row["price"]*$row["amount"];
+                                $cost=$row["cost"];
+                                $delivery=$row["delivery"];
+                            }
+                        $sql= "SELECT image, name from delivery where id=$delivery";
+                        $result=$conn->query($sql); 
+                        $row=$result->fetch_assoc();
+
+                        echo '<div class="element"><div class="product"><img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row["image"]).'" /><h3>';
+                        echo $row["name"]. '</h3></div><div class="options"><h3 class="price">'. $cost. ' zł';
+                        echo '</h3></div></div>';
+                        @$sum+=$cost;
+                        echo '<div class="sum"><h3>Łączna kwota: '.$sum.' zł</h3></div>';  
+                        }
+                    }
+                ?>
+                </div>
+                <div class="personal">
+                    <h1>
+                        Pozostałe dane do zamównienia:
+                    </h1>
+                    <ul>
+                        <?php
+                        if(isset($_GET["number"])){
+                        $sql="SELECT name, subname, tel, mail, miasto, home_number, street, p.method, date FROM orders join payments as p on p.id=orders.payment  WHERE number=$number";
+                        $result=$conn->query($sql); 
+                        $row=$result->fetch_assoc();
+                        echo "<li>Imię: ". $row["name"] ."</li>";
+                        echo "<li>Nazwisko: ". $row["subname"] ."</li>";
+                        echo "<li>Numer telefonu: ". $row["tel"] ."</li>";
+                        echo "<li>Adres e-mail: ". $row["mail"] ."</li>";
+                        echo "<li>Miasto: ". $row["miasto"] ."</li>";
+                        echo "<li>Ulica: ". $row["home_number"] ."</li>";
+                        echo "<li>Numer domu/paczkomatu: ". $row["street"] ."</li>";
+                        echo "<li>Rodaj płatnośći: ". $row["method"] ."</li>";
+                        echo "<li>Data zamównienia: ". $row["date"] ."</li>";
+                        }
+                        ?>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h2>
+            <MARQUEE>
+                Oficjalna strona sklepu interenetowego©
+            </MARQUEE>
+        </h2>
+    </footer>
+</body>
+</html>

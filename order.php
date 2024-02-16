@@ -70,8 +70,8 @@
             <ul class="lista">
                 <li class="disable-selection liststylenone" onclick="list('usluga')"> Usługi</li>
                 <ul class="lista">
-                    <li class="usluga disable disable-selection"><a href="#">Zamówienia</a></li>
-                    <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
+                    <li class="usluga disable disable-selection"><a href="orderhistory.php">Zamówienia</a></li>
+                    <li class="usluga disable disable-selection"><a href="ofert.php?category=serwis">Serwis</a></li>
                     <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
                     <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
                 </ul>

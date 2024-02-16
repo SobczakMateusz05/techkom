@@ -1,10 +1,9 @@
-szczegóły przedmiotów;
-wyświetlanie historii zamówień;
-dodać reklamę na stronie głównej;
-
-
 OPCJONALNIE:
 
-Formularz reklamacji;
+Formularz reklamacji + reklamacja w szczególach historii zamówienia;
 Oferta serwisowa;
 Promocje;
+
+MOŻLIWY DO ROZWINIĘCIA POMYSŁ:
+
+System logowania + koszyk i historia zamówień dla zalogowanego użytkownika

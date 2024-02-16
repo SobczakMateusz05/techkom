@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "connect.php";
     require_once "function.php";
 ?>
@@ -35,10 +36,21 @@
                 <a href="about.php">O nas</a>
             </li>
             <li>
-                
             </li>
             <li>
                 <a href="contact.php">Kontakt</a>
+            </li>
+            <li>
+            </li>
+            <li>
+                <?php
+                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                    echo '<a href="operation.php?operation=logout"> Wyloguj się</a>';
+                }
+                else{
+                    echo '<a href="login.php">Zaloguj się</a>';
+                }
+                ?>
             </li>
             <li>
                 <form method="POST" action="index.php">
@@ -67,8 +79,8 @@
             <ul class="lista">
                 <li class="disable-selection liststylenone" onclick="list('usluga')"> Usługi</li>
                 <ul class="lista">
-                    <li class="usluga disable disable-selection"><a href="#">Zamówienia</a></li>
-                    <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
+                    <li class="usluga disable disable-selection"><a href="orderhistory.php">Zamówienia</a></li>
+                    <li class="usluga disable disable-selection"><a href="ofert.php?category=serwis">Serwis</a></li>
                     <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
                     <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
                 </ul>
@@ -124,9 +136,9 @@
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
-                            echo '<div class="popular-post"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                             echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                            echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'addindex'".')"';
+                            echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'addindex'". '); event.stopPropagation();"';
                             echo '>Dodaj do koszyka</a> </div> </div> </div>';
 		                }
                     }
@@ -145,7 +157,7 @@
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
-                            echo '<div class="suggest-post"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="suggest-post" onclick="spec('.$row["id"].')"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                             echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> </div> </div> </div>';
 		                }
                     }

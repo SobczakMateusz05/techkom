@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "connect.php";
     require_once "function.php";
 ?>
@@ -67,8 +68,8 @@
             <ul class="lista">
                 <li class="disable-selection liststylenone" onclick="list('usluga')"> Usługi</li>
                 <ul class="lista">
-                    <li class="usluga disable disable-selection"><a href="#">Zamówienia</a></li>
-                    <li class="usluga disable disable-selection"><a href="#">Serwis</a></li>
+                    <li class="usluga disable disable-selection"><a href="orderhistory.php">Zamówienia</a></li>
+                    <li class="usluga disable disable-selection"><a href="ofert.php?category=serwis">Serwis</a></li>
                     <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
                     <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
                 </ul>
@@ -98,7 +99,16 @@
                 ">
                     <h1>Dodaj opinie</h1>
                     <h3>Twoja nazwa:</h2>
-                    <input type="text" name="nick" required placeholder="Wprowadź nazwę użytkownika">
+                    <input type="text" name="nick" required placeholder="Wprowadź nazwę użytkownika" 
+                    <?php 
+                    if(isset($_SESSION["user"])){
+                        $id=$_SESSION["user"];
+                        $sql = "SELECT name from user where id=$id";
+                        $result=$conn->query($sql);
+                        $row=$result->fetch_assoc();
+                        echo 'value= " ' . $row["name"] . '"'; 
+                    }
+                    ?>>
                     <h3>Treść opinii:</h2>
                     <textarea name="opinion" cols="40" rows="5" required></textarea>
                     <h3>Twoja ocena:</h2>
