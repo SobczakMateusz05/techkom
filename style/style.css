@@ -37,6 +37,15 @@ header a{
     color: rgba(255, 255, 255, 0.4);
     font-size: large;
 }
+.user{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: large;
+}
+.user:hover{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.4);
+}
 header ul li a:hover{
     text-decoration: underline;
     text-underline-offset: 10px;

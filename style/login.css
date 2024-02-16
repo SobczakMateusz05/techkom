@@ -1,0 +1,19 @@
+.right h1{
+    text-align: center;
+    padding: 40px;
+}
+.missed{
+    color: red;
+}
+.right-bottom{
+    display: flex;
+    align-items: center;
+}
+.button{
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.green{
+    color: green;
+}
