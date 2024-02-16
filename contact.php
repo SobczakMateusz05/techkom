@@ -40,7 +40,19 @@
             <li>
                 <a href="contact.php" class="active">Kontakt</a>
             </li>
-           <li>
+            <li>
+            </li>
+            <li>
+                <?php
+                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                    echo '<a href="operation.php?operation=logout"> Wyloguj się</a>';
+                }
+                else{
+                    echo '<a href="login.php">Zaloguj się</a>';
+                }
+                ?>
+            </li>
+            <li>
                 <form method="POST" action="index.php">
                     <input type="text" name="search" class="searcher" placeholder="Wyszukaj produkt... (efekt stylistyczny)">
                     <input type="submit" value="Wyszukaj">
