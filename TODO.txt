@@ -1,0 +1,85 @@
+1. PROGRAMISTYCZNE
+
+
+
+OPCJONALNIE:
+
+Formularz reklamacji + reklamacja w szczególach historii zamówienia;
+Oferta serwisowa;
+Promocje;
+
+
+
+2. BAZA DANYCH
+
+
+
+1 - DO POPRAWY:
+
+
+Tabela: produkty
+Kolumna: Dysk
+Rodzaj błędu: zapis "Dysk:" w każdym rekordzie
+Sposób naprawy: usunięcie zbędnego tekstu
+
+Tabela: produkty
+Kolumna: description
+Rodzaj błędu: zapis "JDSklep"
+Sposób naprawy: Poprawa zapisu na "TechKom"
+
+Tabela: delivery
+Kolumna: image
+Rodzaj błędu: złe zdjęcia (nie wczytują się)
+Id rekordów, których dotyczy błąd: 1, 6, 7
+Sposób naprawy: dodanie poprawnych zdjęć
+
+
+2 - DO DODANIA DO TABELI:
+
+
+Tabela: produkty
+Rekordy: opcje serwisowe
+Wymagania: id, nazwa, opis, zdjęcie, typ, cena, popularność
+
+Tabela: type
+Rekord: serwis
+Wymagania: id, nazwa
+Opcjonalnie: zdjęcie
+
+
+3 - DO USUNIĘCIA Z TABELI:
+
+
+Tabela: orders
+Rekordy: wszystkie z wyłączenie rekordu z numerem "1765431"
+
+Tabela: cart
+Rekordy: wszystkie
+
+
+4 - TABELE DO UTWORZENIA:
+
+
+Tabela: user
+Kolumny:
+id int AUTO_INCREMENT PRIMARY KEY,
+name varchar(50),
+password varchar(150),
+mail varchar(100);
+
+
+5 - TABELE DO EDYTOWANIA:
+
+
+Tabela: orders
+Rodzaj edycji: dodanie kolumny
+Kolumna: userid int z możliwością ustawienia wartości na NULL
+Watość dla rekordu z numerem "1765431": NULL
+
+Tabela: cart
+Kolumna: userid int
+
+
+3. POZOSTAŁE
+
+Dodanie spowrotem pliku check_mark2.gif

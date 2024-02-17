@@ -1,9 +1,0 @@
-OPCJONALNIE:
-
-Formularz reklamacji + reklamacja w szczególach historii zamówienia;
-Oferta serwisowa;
-Promocje;
-
-MOŻLIWY DO ROZWINIĘCIA POMYSŁ:
-
-System logowania + koszyk i historia zamówień dla zalogowanego użytkownika
