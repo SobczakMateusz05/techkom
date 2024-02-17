@@ -101,7 +101,7 @@ session_start();
         <div class="right">
             <div class="
                 <?php
-                    if(isset($_GET["add"])){
+                    if(isset($_GET["add"])||isset($_GET["log"])){
                         echo 'added'; 
                     }
                     else{
@@ -114,8 +114,11 @@ session_start();
                         if(isset($_GET["add"])&&$_GET["add"]=="yes"){
                             echo '<h2 style="color: green;">Dodano produkt do koszyka!</h2>';
                         }
-                        else{
+                        if(isset($_GET["add"])&&$_GET["add"]=="no"){
                             echo '<h2 style="color: red;">Maksymalna ilość tego przedmiotu w koszyku!</h2>';
+                        }
+                        if(isset($_GET["log"])){
+                            echo '<h2>Nie jesteś zalogowany </h2>';
                         }
                     ?>
                     <div class="flex">
@@ -125,7 +128,12 @@ session_start();
                         ?>
                         >
                         Kontunnuj zakupy</a>
-                        <a href="cart.php" class="button2">Przejdź do koszyka</a>
+                        <?php
+                            if(isset($_GET["log"])){
+                               echo '<a href="login.php" class="button2">Zaloguj się</a>';
+                            }
+                            else echo '<a href="cart.php" class="button2">Przejdź do koszyka</a>';
+                        ?>
                     </div>
                 </div>
             </div>
@@ -277,7 +285,14 @@ session_start();
 		                    {
                                 echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                                 echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                                echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'add'". '); event.stopPropagation();"';
+                                echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
+                                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                                    echo  "'add'";
+                                }
+                                else{
+                                    echo  "'logadd'";
+                                }
+                                echo '); event.stopPropagation();"';
                                 echo '>Dodaj do koszyka</a> </div> </div> </div>';
 		                    }
                         }

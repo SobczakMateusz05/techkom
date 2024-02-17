@@ -95,30 +95,39 @@
             </ul>
         </div>
         <div class="right">
-            <div class="
-            <?php
-                if(isset($_GET["add"])){
-                    echo 'added'; 
-                }
-                else{
-                    echo 'disable';
-                }
-            ?>
-            ">
-            <div class="border2">
+        <div class="
                 <?php
-                    if(isset($_GET["add"])&&$_GET["add"]=="yes"){
-                        echo '<h2 style="color: green;">Dodano produkt do koszyka!</h2>';
+                    if(isset($_GET["add"])||isset($_GET["log"])){
+                        echo 'added'; 
                     }
                     else{
-                        echo '<h2 style="color: red;">Maksymalna ilość tego przedmiotu w koszyku!</h2>';
+                        echo 'disable';
                     }
                 ?>
-                <div class="flex">
-                    <a href="index.php" class="button2">Kontunnuj zakupy</a>
-                    <a href="cart.php" class="button2">Przejdź do koszyka</a>
+            ">
+                <div class="border2">
+                    <?php
+                        if(isset($_GET["add"])&&$_GET["add"]=="yes"){
+                            echo '<h2 style="color: green;">Dodano produkt do koszyka!</h2>';
+                        }
+                        if(isset($_GET["add"])&&$_GET["add"]=="no"){
+                            echo '<h2 style="color: red;">Maksymalna ilość tego przedmiotu w koszyku!</h2>';
+                        }
+                        if(isset($_GET["log"])){
+                            echo '<h2>Nie jesteś zalogowany </h2>';
+                        }
+                    ?>
+                    <div class="flex">
+                        <a href="index.php" class="button2">
+                        Kontunnuj zakupy</a>
+                        <?php
+                            if(isset($_GET["log"])){
+                               echo '<a href="login.php" class="button2">Zaloguj się</a>';
+                            }
+                            else echo '<a href="cart.php" class="button2">Przejdź do koszyka</a>';
+                        ?>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="right-top">
                 <h3 class="disable-selection">
@@ -138,7 +147,15 @@
 		                {
                             echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
                             echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                            echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].','."'addindex'". '); event.stopPropagation();"';
+                            echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
+                            if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                                echo  "'addindex'";
+                            }
+                            else{
+                                echo  "'logindex'";
+                            }
+                           
+                            echo '); event.stopPropagation();"';
                             echo '>Dodaj do koszyka</a> </div> </div> </div>';
 		                }
                     }

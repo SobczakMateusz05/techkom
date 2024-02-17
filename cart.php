@@ -112,12 +112,30 @@ session_start();
                 </h3>
             </div>
             <div class="right-bottom">
-                    <h2>
+                    <h2
+                    <?php
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                    }
+                    else{
+                        echo 'class="disable"';
+                    }
+                    ?>
+                    >
                         Koszyk
                     </h2>
-                    <div class="cart">
+                    <div class="cart
                     <?php
-                        $sql = "SELECT p.name, p.id, p.image, p.price, c.amount from cart as c join produkty as p on c.id=p.id";
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                    }
+                    else{
+                        echo 'disable';
+                    }
+                    ?>
+                    ">
+                    <?php
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                        $id=$_SESSION["user"];
+                        $sql = "SELECT p.name, p.id, p.image, p.price, c.amount from cart as c join produkty as p on c.id=p.id where userid=$id";
                         if($result=$conn->query($sql)){
                             $row=$result->fetch_assoc();
                             $sum=0;
@@ -138,6 +156,7 @@ session_start();
                         else{
                             echo '<h3 class="empty">WYSTĄPIŁ BŁĄD SKONTAKTUJ SIĘ Z ADMINISTRATOREM</h3>';
                         }
+                    }
                     ?> 
 
                     </div>
@@ -174,7 +193,16 @@ session_start();
                             <h4>Numer telefonu(format:123456789):</h4>
                             <input type="tel" required name="tel" pattern="[0-9]{9}" placeholder="Wprowadź numer telefonu">
                             <h4>Adres e-mail:</h4>
-                            <input type="mail" required name="mail" placeholder="Wprowadź adres e-mail">
+                            <input type="mail" required name="mail" placeholder="Wprowadź adres e-mail"
+                            <?php
+                                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                                    $sql="SELECT mail from user where id=$id";
+                                    $result=$conn->query($sql);
+                                    $row=$result->fetch_assoc();
+                                    echo 'value="'.$row["mail"].'"';
+                                }
+                            ?>
+                            >
                             <h4>Ulica:</h4>
                             <input type="text" required name="ulica" placeholder="Wprowadź ulice">
                             <h4>Numer domu:</h4>
@@ -198,6 +226,19 @@ session_start();
                         </div>
                         <input type="submit" value="Zamów i przejdź do podumowania" name="send">
                     </form>
+                <div class="outlog
+                <?php
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                        echo " disable";
+                    }
+                    else{
+                        
+                    }
+                    ?>
+                ">
+                <h1>Nie jesteś zalogowany!</h1>
+                <a href="login.php" class="button">Zaloguj się</a>
+                </div>
             </div>
         </div>
     </main>

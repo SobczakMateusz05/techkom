@@ -103,18 +103,33 @@
            </div>
            <div class="bottom-right
             <?php
-            
                 if(isset($_GET["number"])){
                     echo " disable";
                 }
                 else{
 
-                }
+                }     
             ?>
            ">
+           
                 <div class="right-left">
+                <div class="outlog
+                <?php
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                        echo " disable";
+                    }
+                    else{
+                        
+                    }
+                    ?>
+                ">
+                <h1>Nie jesteś zalogowany!</h1>
+                <a href="login.php" class="button">Zaloguj się</a>
+            </div>
                     <?php
-                        $sql="SELECT o.number, o.date, d.cost from (orders as o join produkty as p on p.id=product) join delivery as d on o.delivery = d.id group by number order by number desc";
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                        $id=$_SESSION["user"];
+                        $sql="SELECT o.number, o.date, d.cost from (orders as o join produkty as p on p.id=product) join delivery as d on o.delivery = d.id where userid=$id group by number order by number desc";
                         $result=$conn->query($sql);
                         while($row=$result->fetch_assoc()){
                             $number=$row["number"];
@@ -128,6 +143,7 @@
                             $sum+=$row["cost"];
                             echo "$sum zł</h2><h5>Data: ". $row["date"] ."</h5></div>";
                         }
+                    }
                     ?>
                 </div>
                 <div class="right-right">
@@ -145,6 +161,7 @@
 
             ">
                 <?php
+                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                 if(isset($_GET["number"])){
                     $number=$_GET["number"];
                 }
@@ -158,7 +175,7 @@
                 <div class="cart">
                 <?php
                     if(isset($_GET["number"])){
-                        $sql = "SELECT p.name, p.image, p.price, o.amount, d.cost, o.delivery from (orders as o join produkty as p on o.product=p.id) join delivery as d on d.id=o.delivery where number=$number";
+                        $sql = "SELECT p.name, p.image, p.price, o.amount, d.cost, o.delivery from (orders as o join produkty as p on o.product=p.id) join delivery as d on d.id=o.delivery where number=$number and userid=$id";
                         if($result=$conn->query($sql)){
                             $sum=0;
                             while($row=$result->fetch_assoc()){
@@ -178,16 +195,27 @@
                         echo '<div class="sum"><h3>Łączna kwota: '.$sum.' zł</h3></div>';  
                         }
                     }
+                }
                 ?>
                 </div>
                 <div class="personal">
-                    <h1>
+                    <h1
+                    <?php
+                        if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+
+                        }
+                        else{
+                            echo 'class="disable"';
+                        }
+                    ?>
+                    >
                         Pozostałe dane do zamównienia:
                     </h1>
                     <ul>
                         <?php
+                        if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                         if(isset($_GET["number"])){
-                        $sql="SELECT name, subname, tel, mail, miasto, home_number, street, p.method, date FROM orders join payments as p on p.id=orders.payment  WHERE number=$number";
+                        $sql="SELECT name, subname, tel, mail, miasto, home_number, street, p.method, date FROM orders join payments as p on p.id=orders.payment  WHERE number=$number and userid=$id";
                         $result=$conn->query($sql); 
                         $row=$result->fetch_assoc();
                         echo "<li>Imię: ". $row["name"] ."</li>";
@@ -199,6 +227,7 @@
                         echo "<li>Numer domu/paczkomatu: ". $row["street"] ."</li>";
                         echo "<li>Rodaj płatnośći: ". $row["method"] ."</li>";
                         echo "<li>Data zamównienia: ". $row["date"] ."</li>";
+                        }
                         }
                         ?>
                         

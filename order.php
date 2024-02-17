@@ -115,6 +115,7 @@
             $delivery=$_POST["delivery"];
             $pay=$_POST["pay"];
             $date=date('Y-m-d', time());
+            $userid=$_SESSION["user"];
 
             $sql="SELECT * from cart";
             $result=$conn->query($sql);
@@ -133,7 +134,8 @@
                 home_number,
                 street,
                 payment,
-                delivery
+                delivery,
+                userid
                 ) values(
                     '$number',
                     '$id',
@@ -147,7 +149,8 @@
                     '$home_number',
                     '$street',
                     '$pay',
-                    '$delivery')";
+                    '$delivery',
+                    '$userid')";
                 $result2=$conn->query($sql2);
             }
             $sql="DELETE from cart";
