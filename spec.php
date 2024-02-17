@@ -101,7 +101,7 @@
         <div class="right">
         <div class="
                 <?php
-                    if(isset($_GET["add"])){
+                    if(isset($_GET["add"])||isset($_GET["log"])){
                         echo 'added'; 
                     }
                     else{
@@ -114,8 +114,11 @@
                         if(isset($_GET["add"])&&$_GET["add"]=="yes"){
                             echo '<h2 style="color: green;">Dodano produkt do koszyka!</h2>';
                         }
-                        else{
+                        if(isset($_GET["add"])&&$_GET["add"]=="no"){
                             echo '<h2 style="color: red;">Maksymalna ilość tego przedmiotu w koszyku!</h2>';
+                        }
+                        if(isset($_GET["log"])){
+                            echo '<h2>Nie jesteś zalogowany </h2>';
                         }
                     ?>
                     <div class="flex">
@@ -125,7 +128,12 @@
                         ?>
                         >
                         Kontunnuj zakupy</a>
-                        <a href="cart.php" class="button2">Przejdź do koszyka</a>
+                        <?php
+                            if(isset($_GET["log"])){
+                               echo '<a href="login.php" class="button2">Zaloguj się</a>';
+                            }
+                            else echo '<a href="cart.php" class="button2">Przejdź do koszyka</a>';
+                        ?>
                     </div>
                 </div>
             </div>
@@ -180,7 +188,19 @@
                                      zł</h2>
                             </div>
                             <div class="addbasket disable-selection"> 
-                                <a href="#" onclick="operation(<?php echo $prod; ?>,'addspec')">Dodaj do koszyka</a> 
+                                <a href="#" onclick=
+                                <?php 
+                                echo '"operation('. $prod. ","; 
+                                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                                    echo  "'addspec'";
+                                }
+                                else{
+                                    echo  "'logspec'";
+                                }
+                                echo')"'; 
+                                ?>
+                                >Dodaj do koszyka</a> 
+                                
                             </div>
                         </div>
                     </div>
