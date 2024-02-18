@@ -82,7 +82,7 @@
                     <li class="usluga disable disable-selection"><a href="orderhistory.php">Zamówienia</a></li>
                     <li class="usluga disable disable-selection"><a href="ofert.php?category=serwis">Serwis</a></li>
                     <li class="usluga disable disable-selection"><a href="opinion.php">Opinie</a></li>
-                    <li class="usluga disable disable-selection"><a href="#">Reklamacja</a></li>
+                    <li class="usluga disable disable-selection"><a href="reclamation.php">Reklamacja</a></li>
                 </ul>
             </ul>
             <ul class="lista">
