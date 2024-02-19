@@ -20,3 +20,15 @@ System opinii,
 Automatycznie obliczana średnia opinii,
 Możliwość dodania opinii (w przypadku zalogowanego konta automatycznie pobierana nazwa),
 W plikach nie używane zdjęcie słodkiego biegnącego pieska :-)
+
+Baza zawiera:
+
+Produkty,
+Kategorię produktów,
+Sposoby dostawy,
+Metody płatności,
+Koszyk,
+Historię zamówień,
+Historię reklamacji,
+Opinię,
+Użytkowników
