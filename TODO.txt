@@ -1,11 +1,10 @@
 1. PROGRAMISTYCZNE
 
-
+Oferta serwisowa (oczekuje na dane w bazie, kod zrobiony);
 
 OPCJONALNIE:
 
-Formularz reklamacji + reklamacja w szczególach historii zamówienia;
-Oferta serwisowa;
+
 Promocje;
 
 
