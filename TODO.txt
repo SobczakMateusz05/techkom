@@ -4,7 +4,6 @@ Oferta serwisowa (oczekuje na dane w bazie, kod zrobiony);
 
 OPCJONALNIE:
 
-
 Promocje;
 
 
