@@ -1,6 +1,9 @@
 1. PROGRAMISTYCZNE
 
+
+
 Oferta serwisowa (oczekuje na dane w bazie, kod zrobiony);
+
 
 OPCJONALNIE:
 
