@@ -199,8 +199,14 @@
                             $id=$_SESSION["user"];
                             $sql="SELECT DISTINCT r.id, r.order_number, r.date from reclamation as r join orders as o on r.order_number=o.number where userid=$id";
                             $result=$conn->query($sql);
-                            while($row=$result->fetch_assoc()){
-                                echo '<div class="post"><img src="img/complaint.png"><h2>Reklamacja nr.'. $row["id"] . '</h2><h2>Zamówienie nr.'.$row["order_number"].'</h2><h5>Data: '.$row["date"].'</h5></div>';
+                            $num_row=mysqli_num_rows($result);
+                            if($num_row==0){
+                                echo '<h2 class="center"style="color: red; margin-top:25px;"> Nie znaleziono żadnej reklamacji</h2>';
+                            }
+                            else{
+                                while($row=$result->fetch_assoc()){
+                                    echo '<div class="post"><img src="img/complaint.png"><h2>Reklamacja nr.'. $row["id"] . '</h2><h2>Zamówienie nr.'.$row["order_number"].'</h2><h5>Data: '.$row["date"].'</h5></div>';
+                                }
                             }
                         }
                     ?>

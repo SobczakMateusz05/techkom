@@ -132,17 +132,23 @@
                         $sql="SELECT o.number, o.date, d.cost from (orders as o join produkty as p on p.id=product) join delivery as d on o.delivery = d.id where userid=$id group by number order by number desc";
                         $result=$conn->query($sql);
                         echo "<h1>Historia twoich zamówień</h1>";
-                        while($row=$result->fetch_assoc()){
-                            $number=$row["number"];
-                            echo '<div class="post" onclick="history('.$row["number"].')"><img src="img/order.png"><h2>Zamówienie nr. '.$number.'</h2><h2>Kwota: ';
-                            $sql2="SELECT p.price, o.amount from orders as o join produkty as p on p.id=product WHERE number=$number";
-                            $result2=$conn->query($sql2);
-                            $sum=0;
-                            while($row2=$result2->fetch_assoc()){
-                               $sum+=$row2["price"]*$row2["amount"];
+                        $num_row=mysqli_num_rows($result);
+                        if($num_row==0){
+                            echo '<h2 class="center"style="color: red; margin-top:25px;"> Nie znaleziono żadnych zamówień</h2>';
+                        }
+                        else{
+                            while($row=$result->fetch_assoc()){
+                                $number=$row["number"];
+                                echo '<div class="post" onclick="history('.$row["number"].')"><img src="img/order.png"><h2>Zamówienie nr. '.$number.'</h2><h2>Kwota: ';
+                                $sql2="SELECT p.price, o.amount from orders as o join produkty as p on p.id=product WHERE number=$number";
+                                $result2=$conn->query($sql2);
+                                $sum=0;
+                                while($row2=$result2->fetch_assoc()){
+                                   $sum+=$row2["price"]*$row2["amount"];
+                                }
+                                $sum+=$row["cost"];
+                                echo "$sum zł</h2><h5>Data: ". $row["date"] ."</h5></div>";
                             }
-                            $sum+=$row["cost"];
-                            echo "$sum zł</h2><h5>Data: ". $row["date"] ."</h5></div>";
                         }
                     }
                     ?>
