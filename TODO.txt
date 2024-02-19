@@ -71,6 +71,7 @@ Tabela: reclamation
 Kolumny:
 id int AUTO_INCREMENT PRIMARY KEY,
 order_number double,
+reason text,
 date date;
 Komenda po utowrzeniu tabeli: "ALTER TABLE reclamation AUTO_INCREMENT = 5674;"
 
