@@ -131,6 +131,7 @@
                         $id=$_SESSION["user"];
                         $sql="SELECT o.number, o.date, d.cost from (orders as o join produkty as p on p.id=product) join delivery as d on o.delivery = d.id where userid=$id group by number order by number desc";
                         $result=$conn->query($sql);
+                        echo "<h1>Historia twoich zamówień</h1>";
                         while($row=$result->fetch_assoc()){
                             $number=$row["number"];
                             echo '<div class="post" onclick="history('.$row["number"].')"><img src="img/order.png"><h2>Zamówienie nr. '.$number.'</h2><h2>Kwota: ';

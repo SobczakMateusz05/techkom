@@ -100,9 +100,20 @@
                 <h3 class="disable-selection">
                     TechKom > Ten Sklep > Usługi > Opinie
                 </h3>
-                <a href="addopinion.php">Dodaj opinie</a>
+                <?php
+                if(empty($_GET["opinion"])){
+                    echo '<a href="opinion.php?opinion=add">Dodaj opinie</a>';
+                }
+
+                ?>
             </div>
-            <div class="right-bottom">
+            <div class="right-bottom
+            <?php
+                if(isset($_GET["opinion"])){
+                    echo 'disable';
+                }
+            ?>
+            ">
                 <h2>
                     Opinie
                 </h2>
@@ -128,6 +139,63 @@
                         echo "Nie znaleziono żadnych opinii";
                     }
                 ?>
+            </div>
+            <div class="right-bottom2
+            <?php
+                if(empty($_GET["opinion"])){
+                    echo 'disable';
+                }
+            ?>
+            ">
+            <form method="POST" action="opinion.php?opinion=added" class="
+                <?php
+                    if(isset($_POST["send"])){
+                        echo "disable";
+                    }
+                ?>
+                ">
+                    <h1>Dodaj opinie</h1>
+                    <h3>Twoja nazwa:</h2>
+                    <input type="text" name="nick" required placeholder="Wprowadź nazwę użytkownika" 
+                    <?php 
+                    if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                        $id=$_SESSION["user"];
+                        $sql = "SELECT name from user where id=$id";
+                        $result=$conn->query($sql);
+                        $row=$result->fetch_assoc();
+                        echo 'value= " ' . $row["name"] . '"'; 
+                    }
+                    ?>>
+                    <h3>Treść opinii:</h2>
+                    <textarea name="opinion" cols="40" rows="5" required></textarea>
+                    <h3>Twoja ocena:</h2>
+                    <select name="mark" required>
+                    <?php
+                        scale();
+                    ?>
+                    </select>
+                    <input type="submit" value="Dodaj opinie" name="send">
+                </form>
+                <div class="
+                <?php
+                    if(empty($_POST["send"])){
+                        echo "disable";
+                    }
+                    else{
+                        $user = $_POST["nick"];
+                        $date=date('Y-m-d', time());
+                        $opinion=$_POST["opinion"];
+                        $rating=$_POST["mark"];
+
+                        $sql= "INSERT INTO rewiews(username,date, review, rating) values ('$user','$date','$opinion','$rating')";
+                        $result=$conn->query($sql);
+                    }
+                ?>
+                ">
+                    <h1 style="color: green;">Pomyślnie dodano opinie</h1>
+                    <img src="img/check_mark.gif">
+                    <a href="opinion.php">Wróć do opinii</a>
+                </div>
             </div>
         </div>
     </main>
