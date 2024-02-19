@@ -60,7 +60,7 @@
                 </form>
             </li>
             <li>
-                <a href="#">
+                <a href="cart.php">
                     <img src="img/basket.png">
                 </a>
             </li>

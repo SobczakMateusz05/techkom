@@ -153,6 +153,17 @@
                     '$userid')";
                 $result2=$conn->query($sql2);
             }
+            $result=$conn->query($sql);
+            while($row=$result->fetch_assoc()){
+                $id=$row["id"];
+                $sql2="SELECT popularity from produkty where id=$id";
+                $result2=$conn->query($sql2);
+                $row2=$result2->fetch_assoc();
+                $popularity=$row2["popularity"]+$row["amount"];
+                $sql3="UPDATE produkty set popularity=$popularity where id=$id";
+                $result3=$conn->query($sql3);
+
+            }
             $sql="DELETE from cart";
             $result=$conn->query($sql);
             ?>
