@@ -40,3 +40,57 @@
 h4{
     text-align: center;
 }
+
+.right-bottom2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.right-bottom2 form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.right-bottom2 form h3{
+    padding: 7px 0px;
+}
+.right-bottom2 form input[type=submit]{
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 17px;
+    border: 2px black solid;
+}
+.right-bottom2 form input[type=submit]:hover{
+    opacity: 85%;
+    box-shadow: black 3px 3px 7px;
+    cursor: pointer;
+}
+.opi{
+    height: 150px;
+}
+.right-bottom2 div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.right-bottom2 img{
+    max-width: 100px;
+}
+.right-bottom2 div a{
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 17px;
+    border: 2px black solid;
+    text-decoration: none;
+    color: black;
+    background: #F0F0F0;
+}
+.right-bottom2 div a:hover{
+    opacity: 85%;
+    box-shadow: black 3px 3px 7px;
+    cursor: pointer;
+}
