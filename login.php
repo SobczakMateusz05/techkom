@@ -90,7 +90,7 @@
                 <ul class="lista">
                     <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
                     <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
-                    <li class="actual disable disable-selection"><a href="#">Benchmark</a></li>
+                    <li class="actual disable disable-selection"><a href="https://www.3dmark.com/">Benchmark</a></li>
                 </ul>
             </ul>
         </div>
@@ -103,7 +103,6 @@
             <div class="right-bottom">
                 <h1>Zaloguj się:</h1>
                     <?php
-                
                 if(isset($_POST["log"])){
                     $variable=0;
                     require_once "connect.php";
@@ -133,8 +132,8 @@
                             $row=$result->fetch_assoc();
                             $_SESSION['user']=$row['id'];
                             $result->free_result();
-                            header("Location: index.php");
-                        }
+                            echo '<script>window.location.href = "index.php";</script>';        
+                       }
                         else{
                             echo '<h4 class="missed">Błedny login lub/i hasło!</h4>';
                         }
@@ -142,7 +141,6 @@
                         @$conn->close();
 
                     }
-
                 }
                 ?>
                 <form method="POST" action="login.php">
