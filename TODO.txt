@@ -22,3 +22,12 @@ Tabela: type
 Rekord: serwis
 Wymagania: id, nazwa
 Opcjonalnie: zdjęcie
+
+
+3 - TABELE DO UTWORZENIA
+
+
+Tabela: promotion
+Kolumna:
+prod_id int PRIMARY KEY,
+new_price float
