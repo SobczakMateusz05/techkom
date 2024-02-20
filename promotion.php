@@ -21,7 +21,7 @@
 
             </li>
             <li>
-                <a href="index.php"  class="active">Stona Główna</a>
+                <a href="index.php">Stona Główna</a>
             </li>
             <li>
                 
@@ -153,10 +153,10 @@
                                 echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row["new_price"]. ' zł</h2>';
                                 echo '</div><div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
                                 if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
-                                    echo  "'addindex'";
+                                    echo  "'addprom'";
                                 }
                                 else{
-                                    echo  "'logindex'";
+                                    echo  "'logprom'";
                                 }
                                 echo '); event.stopPropagation();"';
                                 echo '>Dodaj do koszyka</a> </div> </div> </div>';
