@@ -7,6 +7,8 @@ Ofertę produktów podzieloną na kategorię,
 System poularności produktów aktualizowany o ilość kupioncyh produktów,
 Możliwość filtracji oraz sortowania produktów w kategoriach,
 Po kliknięciu w produkt pojawiają się jego szczegóły,
+Jeśli na produkt jest jakaś promocja stara cena jest przekreślona, i wyświetlana jest cena promocyjna,
+Wszystkie przecenione produkty wyświetlają się po wejściu w Aktualności -> Promocje,
 W pełni działający system logowania i rejstracji,
 Intuicyjne dodawanie produktów do koszyka,
 Koszyk przypisany do użytkownika,
@@ -23,7 +25,7 @@ W plikach nie używane zdjęcie słodkiego biegnącego pieska :-)
 
 Baza zawiera:
 
-Produkty,
+Produkty i usługi serwisowe,
 Kategorię produktów,
 Sposoby dostawy,
 Metody płatności,
@@ -31,4 +33,5 @@ Koszyk,
 Historię zamówień,
 Historię reklamacji,
 Opinię,
-Użytkowników
+Użytkowników,
+Promocję
