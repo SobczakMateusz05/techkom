@@ -24,6 +24,5 @@ NIE DZIAŁA
 usługi>serwis
 dodawanie konta - warning
 zdj - rozmiary
-pobranie -zdj
 brak update promocji do koszyka
 
