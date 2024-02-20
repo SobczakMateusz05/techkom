@@ -119,9 +119,8 @@
                     <a href="reclamation.php?choose=2" class="button">Historia Reklamacji</a>
                     </div>
                 </div>
-                <div class="right-left">
-                    <div class="outlog
-                    <?php
+                <div class="right-left
+                <?php
                     if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                         echo " disable";
                     }
@@ -129,7 +128,8 @@
                         
                     }
                     ?>
-                    ">
+                ">
+                    <div class="outlog">
                         <h1>Nie jesteś zalogowany!</h1>
                         <a href="login.php" class="button">Zaloguj się</a>
                     </div>
