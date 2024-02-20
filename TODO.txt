@@ -10,6 +10,11 @@ OPCJONALNIE:
 Promocje;
 
 
+
+2. BAZA DANYCH
+
+
+
 2 - DO DODANIA DO TABELI:
 
 
@@ -42,6 +47,11 @@ reason text,
 date date;
 Komenda po utowrzeniu tabeli: "ALTER TABLE reclamation AUTO_INCREMENT = 5674;"
 
+Tabela: promotion
+Kolumny:
+prod_id int PRIMARY KEY,
+new_price float
+
 5 - TABELE DO EDYTOWANIA:
 
 
@@ -56,4 +66,3 @@ Kolumna: userid int
 
 3. POZOSTAŁE
 
-Dodanie spowrotem pliku check_mark2.gif,
