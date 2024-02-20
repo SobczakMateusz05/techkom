@@ -91,7 +91,7 @@
                 <ul class="lista">
                     <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
                     <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
-                    <li class="actual disable disable-selection"><a href="#">Benchmark</a></li>
+                    <li class="actual disable disable-selection"><a href="https://www.3dmark.com/">Benchmark</a></li>
                 </ul>
             </ul>
         </div>

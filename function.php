@@ -7,6 +7,7 @@ Function products($conn){
         }
     }
 }
+
 Function options($a){
     for ($i=1; $i < 6; $i++) { 
         echo '<option value="'.$i.'"';
@@ -16,6 +17,7 @@ Function options($a){
     echo '>'.$i.'</option>';
     } 
 }
+
 Function cartitem($image, $name, $price, $amount, $id){
     echo '<div class="element"><div class="product"><img src="data:image/jpg;charset=utf8;base64,'.base64_encode($image).'" /><h3>';
     echo $name. '</h3></div><div class="options"><h3 class="price">'. $price. ' zł';
@@ -26,11 +28,13 @@ Function cartitem($image, $name, $price, $amount, $id){
     echo '<h3 class="delete disable-selection" onclick="operation('.$id. " ,'del')";
     echo '">USUŃ</h3></div></div>';
 }
+
 Function scale(){
     for($i=1; $i<=5; $i+=0.5){
         echo '<option value="'. $i.'">'.$i. "</option>"; 
     }
 }
+
 Function historyitem($image, $name, $price, $amount){
     echo '<div class="element"><div class="product"><img src="data:image/jpg;charset=utf8;base64,'.base64_encode($image).'" /><h3>';
     echo $name. '</h3></div><div class="options"><h3 class="price">'. $price. ' zł';
