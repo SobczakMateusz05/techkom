@@ -90,4 +90,5 @@ Kolumna: userid int
 
 3. POZOSTAŁE
 
-Dodanie spowrotem pliku check_mark2.gif
+Dodanie spowrotem pliku check_mark2.gif,
+Wymyślić co zrobić z benchmarkami
