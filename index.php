@@ -145,9 +145,19 @@
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
+                            $id= $row["id"];
                             echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
-                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p> <h2>'. $row["price"] .' zł</h2> </div>';
-                            echo '<div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
+                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p>';
+                            $sql7="SELECT new_price from promotion where prod_id=$id";
+                            $result7=$conn -> query($sql7);
+                            $num_row7 = mysqli_num_rows($result7);
+                            if($num_row7<1){
+                                echo '<h2>'. $row["price"] .' zł</h2>';
+                            }
+                            else{
+                                $row7=$result7->fetch_assoc();
+                                echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row7["new_price"]. ' zł</h2>';                                }
+                            echo '</div><div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
                             if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                                 echo  "'addindex'";
                             }
