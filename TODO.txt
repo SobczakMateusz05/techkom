@@ -10,31 +10,6 @@ OPCJONALNIE:
 Promocje;
 
 
-
-2. BAZA DANYCH
-
-
-
-1 - DO POPRAWY:
-
-
-Tabela: produkty
-Kolumna: Dysk
-Rodzaj błędu: zapis "Dysk:" w każdym rekordzie
-Sposób naprawy: usunięcie zbędnego tekstu
-
-Tabela: produkty
-Kolumna: description
-Rodzaj błędu: zapis "JDSklep"
-Sposób naprawy: Poprawa zapisu na "TechKom"
-
-Tabela: delivery
-Kolumna: image
-Rodzaj błędu: złe zdjęcia (nie wczytują się)
-Id rekordów, których dotyczy błąd: 1, 6, 7
-Sposób naprawy: dodanie poprawnych zdjęć
-
-
 2 - DO DODANIA DO TABELI:
 
 
@@ -47,15 +22,6 @@ Rekord: serwis
 Wymagania: id, nazwa
 Opcjonalnie: zdjęcie
 
-
-3 - DO USUNIĘCIA Z TABELI:
-
-
-Tabela: orders
-Rekordy: wszystkie z wyłączenie rekordu z numerem "1765431"
-
-Tabela: cart
-Rekordy: wszystkie
 
 
 4 - TABELE DO UTWORZENIA:
@@ -91,4 +57,3 @@ Kolumna: userid int
 3. POZOSTAŁE
 
 Dodanie spowrotem pliku check_mark2.gif,
-Wymyślić co zrobić z benchmarkami
