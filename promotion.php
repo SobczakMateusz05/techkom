@@ -2,9 +2,6 @@
     session_start();
     require_once "connect.php";
     require_once "function.php";
-    if(empty($_GET["prod"])){
-        header('Location:index.php');
-    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -12,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/spec.css">
+    <link rel="stylesheet" href="style/index.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <title>Sklep internetowy</title>
     <script src="script.js"></script>
@@ -30,7 +27,7 @@
                 
             </li>
             <li>
-                <a href="products.php" class="active">Produkty</a>
+                <a href="products.php">Produkty</a>
             </li>
             <li>
                 
@@ -39,7 +36,6 @@
                 <a href="about.php">O nas</a>
             </li>
             <li>
-                
             </li>
             <li>
                 <a href="contact.php">Kontakt</a>
@@ -122,11 +118,7 @@
                         }
                     ?>
                     <div class="flex">
-                        <a href="#" class="button2" onclick=
-                        <?php
-                            echo '"spec('."'".$_GET["prod"]."'" .')"';
-                        ?>
-                        >
+                        <a href="index.php" class="button2">
                         Kontunnuj zakupy</a>
                         <?php
                             if(isset($_GET["log"])){
@@ -139,80 +131,65 @@
             </div>
             <div class="right-top">
                 <h3 class="disable-selection">
-                    TechKom > Ten Sklep > Produkty >
-                    <?php
-                        $prod=$_GET["prod"];
-                        $sql="SELECT p.name, t.nazwa from produkty as p join type as t on p.type=t.id where p.id=$prod";
-                        $result=$conn->query($sql);
-                        $row=$result->fetch_assoc();
-                        $category=$row["nazwa"];
-                        $name=$row["name"];
-                        echo  UCWORDS($category).  " > ".$name;
-                    ?>
+                    TechKom > Ten Sklep > Aktualności > Promocje
                 </h3>
             </div>
             <div class="right-bottom">
-            <?php
-                    if($category=="komputery"||$category=="laptopy"){
-                        $sql="SELECT image, description, procesor, ram, gpu , dysk, system, price from produkty where id=$prod";
-                        $result=$conn->query($sql);
-                        $row=$result->fetch_assoc();
-                    }
-                    else{
-                        $sql="SELECT image, description, price from produkty where id=$prod";
-                        $result=$conn->query($sql);
-                        $row=$result->fetch_assoc();
-                    }
-                ?>
-                <div class="product">
-                    <div class="top-product">
-                        <?php
-                        echo '<img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />'
-                        ?>
-                        <div class="top-product-right">
-                            <div>
-                                <h2>
-                                    <?php
-                                        echo $name;
-                                    ?>
-                                </h2>
-                                <h3>
-                                    <?php
-                                        echo $row["description"];
-                                    ?>
-                                </h3>
-                                <h2>Cena: 
-                                    <?php
-                                        echo $row["price"];
-                                    ?>
-                                     zł</h2>
-                            </div>
-                            <div class="addbasket disable-selection"> 
-                                <a href="#" onclick=
-                                <?php 
-                                echo '"operation('. $prod. ","; 
+                <div class="right-left">
+                    <h2>
+                        Najpopularniejsze
+                    </h2>
+
+                    <?php
+                    $sql = " SELECT * FROM produkty join promotion on id=prod_id";
+                    if($result = $conn->query($sql)){
+                        if(mysqli_num_rows($result)!=0){
+                            $num_row=mysqli_num_rows($result)*2;
+                            while($row=$result->fetch_assoc()) 
+		                    {
+                                $id= $row["id"];
+                                echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                                echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p>';
+                                echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row["new_price"]. ' zł</h2>';
+                                echo '</div><div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
                                 if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
-                                    echo  "'addspec'";
+                                    echo  "'addprom'";
                                 }
                                 else{
-                                    echo  "'logspec'";
+                                    echo  "'logprom'";
                                 }
-                                echo')"'; 
-                                ?>
-                                >Dodaj do koszyka</a> 
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                        if($category=="komputery"||$category=="laptopy"){
-                            echo '<div class="spec"><h3>Specyfikacja:</h3><div class="text"><p class="width">PROCESOR: </p><p>'. $row["procesor"]. '</p></div>';
-                            echo '<div class="text"><p class="width">PAMIĘĆ RAM: </p><p>'. $row["ram"]. ' GB</p></div>';
-                            echo '<div class="text"><p class="width">KARTA GRAFICZNA: </p><p>'. $row["gpu"]. '</p></div>';
-                            echo '<div class="text"><p class="width">DYSK TWARDY: </p><p>'. $row["dysk"]. '</p></div>';
-                            echo '<div class="text"><p class="width">SYSTEM OPERACYJNY: </p><p>'. $row["system"]. '</p></div></div>';
+                                echo '); event.stopPropagation();"';
+                                echo '>Dodaj do koszyka</a> </div> </div> </div>';
+		                    }
                         }
+                        else{
+                            $num_row=3;
+                            echo "<h2 style=". '"color: red; margin-top:25px;"'."> Nie znaleziono żadnego przedmiotu</h2>";
+                        }
+                    }
+                    else{
+                        echo "Nie odczytano żadnych danych";
+                    }
                     ?>
+                </div>
+                <div class="right-right">
+                    
+                    <h2>
+                        Najnowsze
+                    </h2>
+                    <?php
+                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT $num_row";
+                    if($result = $conn->query($sql)){
+                        while($row=$result->fetch_assoc()) 
+		                {
+                            echo '<div class="suggest-post" onclick="spec('.$row["id"].')"> <img class="item_image" src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> </div> </div> </div>';
+		                }
+                    }
+                    else{
+                        echo "Nie odczytano żadnych danych";
+                    }
+                    ?>               
                 </div>
             </div>
         </div>

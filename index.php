@@ -88,7 +88,7 @@
             <ul class="lista">
                 <li class="disable-selection liststylenone" onclick="list('actual')"> Aktualności</li>
                 <ul class="lista">
-                    <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
+                    <li class="actual disable disable-selection"><a href="promotion.php">Promocje</a></li>
                     <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
                     <li class="actual disable disable-selection"><a href="https://www.3dmark.com/">Benchmark</a></li>
                 </ul>
@@ -156,7 +156,8 @@
                             }
                             else{
                                 $row7=$result7->fetch_assoc();
-                                echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row7["new_price"]. ' zł</h2>';                                }
+                                echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row7["new_price"]. ' zł</h2>';                                
+                            }
                             echo '</div><div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
                             if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                                 echo  "'addindex'";

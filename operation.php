@@ -101,6 +101,32 @@ if($_GET["operation"]=="addspec"){
     }
 }
 
+if($_GET["operation"]=="addprom"){
+    $prod=$_GET["prod"];
+    $sql = "SELECT * from cart where id=$prod and userid=$id";
+    $result=$conn -> query($sql);
+    $num_row=mysqli_num_rows($result);
+    if($num_row==0){
+        $sql = "INSERT INTO cart(id, amount, userid) values($prod, 1, $id)";
+        if($result=$conn->query($sql)){
+            header("Location:prom.php?prod=$prod&add=yes");
+        }
+    }
+    else{
+        $sql ="SELECT amount from cart";
+        $result=$conn->query($sql);
+        $row = $result -> fetch_assoc();
+        if($row['amount']<5){
+            $amount = $row['amount']+1;
+            $sql = "UPDATE cart SET amount = $amount where userid=$id";
+            $result = $conn->query($sql);
+            header("Location:prom.php?prod=$prod&add=yes");
+        }
+        else{
+            header("Location:prom.php?prod=$prod&add=no");
+        }
+    }
+}
 
 
 if($_GET["operation"]=="del"){
@@ -126,10 +152,16 @@ if($_GET["operation"]=="logout"){
 if($_GET["operation"]=="logindex"){
     header('Location:index.php?log=yes');
 }
+
+if($_GET["operation"]=="logprom"){
+    header('Location:promotion.php?log=yes');
+}
+
 if($_GET["operation"]=="logspec"){
     $prod=$_GET["prod"];
     header("Location:spec.php?prod=$prod&log=yes");
 }
+
 if($_GET["operation"]=="logadd"){
     $prod=$_GET["prod"];
     $sql = " SELECT nazwa FROM produkty as p JOIN type as t ON p.type = t.id WHERE p.id=$prod";
