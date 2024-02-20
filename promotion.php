@@ -88,7 +88,7 @@
             <ul class="lista">
                 <li class="disable-selection liststylenone" onclick="list('actual')"> Aktualności</li>
                 <ul class="lista">
-                    <li class="actual disable disable-selection"><a href="#">Promocje</a></li>
+                    <li class="actual disable disable-selection"><a href="promotion.php">Promocje</a></li>
                     <li class="actual disable disable-selection"><a href="about.php">Nasz sklep</a></li>
                     <li class="actual disable disable-selection"><a href="https://www.3dmark.com/">Benchmark</a></li>
                 </ul>
@@ -131,7 +131,7 @@
             </div>
             <div class="right-top">
                 <h3 class="disable-selection">
-                    TechKom > Ten Sklep > Strona Główna
+                    TechKom > Ten Sklep > Aktualności > Promocje
                 </h3>
             </div>
             <div class="right-bottom">
@@ -141,34 +141,31 @@
                     </h2>
 
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY popularity desc LIMIT 15";
+                    $sql = " SELECT * FROM produkty join promotion on id=prod_id";
                     if($result = $conn->query($sql)){
-                        while($row=$result->fetch_assoc()) 
-		                {
-                            $id= $row["id"];
-                            echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
-                            echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p>';
-                            $sql7="SELECT new_price from promotion where prod_id=$id";
-                            $result7=$conn -> query($sql7);
-                            $num_row7 = mysqli_num_rows($result7);
-                            if($num_row7<1){
-                                echo '<h2>'. $row["price"] .' zł</h2>';
-                            }
-                            else{
-                                $row7=$result7->fetch_assoc();
-                                echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row7["new_price"]. ' zł</h2>';                                
-                            }
-                            echo '</div><div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
-                            if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
-                                echo  "'addindex'";
-                            }
-                            else{
-                                echo  "'logindex'";
-                            }
-                           
-                            echo '); event.stopPropagation();"';
-                            echo '>Dodaj do koszyka</a> </div> </div> </div>';
-		                }
+                        if(mysqli_num_rows($result)!=0){
+                            $num_row=mysqli_num_rows($result)*2;
+                            while($row=$result->fetch_assoc()) 
+		                    {
+                                $id= $row["id"];
+                                echo '<div class="popular-post" onclick="spec('.$row["id"].')"> <img src="data:image/jpg;charset=utf8;base64,'.base64_encode($row['image']).'" />';
+                                echo '<div class="in"> <div> <h2>'. $row["name"] . '</h2> <p>'. $row["description"]. '</p>';
+                                echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row["new_price"]. ' zł</h2>';
+                                echo '</div><div class="addbasket disable-selection"> <a href="#" onclick="operation('.$row["id"].',';
+                                if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
+                                    echo  "'addindex'";
+                                }
+                                else{
+                                    echo  "'logindex'";
+                                }
+                                echo '); event.stopPropagation();"';
+                                echo '>Dodaj do koszyka</a> </div> </div> </div>';
+		                    }
+                        }
+                        else{
+                            $num_row=3;
+                            echo "<h2 style=". '"color: red; margin-top:25px;"'."> Nie znaleziono żadnego przedmiotu</h2>";
+                        }
                     }
                     else{
                         echo "Nie odczytano żadnych danych";
@@ -181,7 +178,7 @@
                         Najnowsze
                     </h2>
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT 20";
+                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT $num_row";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
@@ -192,8 +189,7 @@
                     else{
                         echo "Nie odczytano żadnych danych";
                     }
-                    ?>  
-                    <img src="img/addR.png" class="ad">              
+                    ?>               
                 </div>
             </div>
         </div>
