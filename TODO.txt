@@ -1,14 +1,10 @@
+
 1. PROGRAMISTYCZNE
 
 
 Oferta serwisowa (oczekuje na dane w bazie, kod zrobiony);
 
 Promocje (oczekuje na dane w bazie, kod zrobiony);
-
-
-
-2. BAZA DANYCH
-
 
 
 2 - DO DODANIA DO TABELI:
@@ -23,11 +19,11 @@ Rekord: serwis
 Wymagania: id, nazwa
 Opcjonalnie: zdjęcie
 
+NIE DZIAŁA
 
-3 - TABELE DO UTWORZENIA
+usługi>serwis
+dodawanie konta - warning
+zdj - rozmiary
+pobranie -zdj
+brak update promocji do koszyka
 
-
-Tabela: promotion
-Kolumna:
-prod_id int PRIMARY KEY,
-new_price float
