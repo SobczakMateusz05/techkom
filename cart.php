@@ -141,10 +141,32 @@ session_start();
                             $sum=0;
                             if(@$row["id"]>=1){
                                 cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"]);
-                                $sum+=$row["price"]*$row["amount"];
+                                $prod=$row["id"];
+                                    $sql7="SELECT new_price from promotion where prod_id=$prod";
+                                    $result7=$conn->query($sql7);
+                                    if(mysqli_num_rows($result7)==0){
+                                        $price =$row["price"];
+                                    }
+                                    else{
+                                        $row7=$result7->fetch_assoc();
+                                        @$price=$row7["new_price"];
+                                    }
+
+                                    $sum+=$price*$row["amount"];
                                 while($row=$result->fetch_assoc()){
                                     cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"]);
-                                    $sum+=$row["price"]*$row["amount"];
+                                    $prod=$row["id"];
+                                    $sql7="SELECT new_price from promotion where prod_id=$prod";
+                                    $result7=$conn->query($sql7);
+                                    if(mysqli_num_rows($result7)==0){
+                                        $price =$row["price"];
+                                    }
+                                    else{
+                                        $row7=$result->fetch_assoc();
+                                        @$price=$row7["new_price"];
+                                    }
+
+                                    $sum+=$price*$row["amount"];
                                 }
                                 echo '<div class="sum"><h3>Łączna kwota: '.$sum.' zł</h3></div>';
                                 $set=53;

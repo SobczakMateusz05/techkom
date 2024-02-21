@@ -140,7 +140,7 @@
                             while($row=$result->fetch_assoc()){
                                 $number=$row["number"];
                                 echo '<div class="post" onclick="history('.$row["number"].')"><img src="img/order.png"><h2>Zamówienie nr. '.$number.'</h2><h2>Kwota: ';
-                                $sql2="SELECT p.price, o.amount from orders as o join produkty as p on p.id=product WHERE number=$number";
+                                $sql2="SELECT o.price, o.amount from orders as o join produkty as p on p.id=product WHERE number=$number";
                                 $result2=$conn->query($sql2);
                                 $sum=0;
                                 while($row2=$result2->fetch_assoc()){

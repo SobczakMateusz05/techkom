@@ -183,7 +183,17 @@
                                 </h3>
                                 <h2>Cena: 
                                     <?php
-                                        echo $row["price"];
+                                        $sql7 = "SELECT new_price from promotion where prod_id=$prod";
+                                        $result7=$conn->query($sql7);
+                                        $num_row7=mysqli_num_rows($result7);
+                                        if($num_row7<1){
+                                            echo $row["price"];
+                                        }
+                                        else{
+                                            $row7=$result7->fetch_assoc();
+                                            echo '<a class="overline">' .$row["price"].'</a><a class="red">'. $row7["new_price"] . "</a>";
+                                        }
+
                                     ?>
                                      zł</h2>
                             </div>
