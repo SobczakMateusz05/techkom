@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 01:45 AM
+-- Generation Time: Feb 21, 2024 at 02:02 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -32,6 +32,14 @@ CREATE TABLE `cart` (
   `userid` int(11) DEFAULT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `userid`, `amount`) VALUES
+(15, 1, 5),
+(15, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -310,7 +318,7 @@ CREATE TABLE `rewiews` (
 --
 
 INSERT INTO `rewiews` (`id`, `username`, `date`, `review`, `rating`) VALUES
-(1, 'Paweł Kupiec', '2022-01-19', 'Rakieta, nie komputer! To mój drugi PC \"gotowiec\" od Techkom i kolejny raz się nie zawiodłem. Kupując ten zestaw otrzymujesz gotowy kombajn,\r\nna którym tylko instalujesz grę i nie martwisz się o nic - wszystko śmiga w takiej ilości FPS, że szok. Do tego całość jest bardzo schludnie\r\nzmontowana, no i oczywiście obsługa klienta w x-kom - jak zawsze na najwyższym poziomie. Inne sklepy mogą Wam buty lizać.', 5),
+(1, 'Paweł Kupiec', '2022-01-19', 'Rakieta, nie komputer! To mój drugi PC \"gotowiec\" od Techkom i kolejny raz się nie zawiodłem. Kupując ten zestaw otrzymujesz gotowy kombajn,\nna którym tylko instalujesz grę i nie martwisz się o nic - wszystko śmiga w takiej ilości FPS, że szok. Do tego całość jest bardzo schludnie\nzmontowana, no i oczywiście obsługa klienta w Techkom - jak zawsze na najwyższym poziomie. Inne sklepy mogą Wam buty lizać.', 5),
 (2, 'reoberto1124', '2023-05-26', 'Petarda!!! Kupiłem po Black Friday za 12100 PLN.\r\nZostałem bardzo pozytywnie zaskoczony specyfiką. Szczególnie tą owianą tajemnicą. Karta MSI, szybszy RAM (3600) oraz zasilacz firmy Be Quiet :)\r\nKalkulowałem przed zakupem ile kosztowałoby mnie złożenie takiego PC. Po sprawdzeniu cen w większości wiodących sklepów okazało się że same podzespoły wychodziły drożej. I to bez systemu operacyjnego!! Posiadam i gram od 2 tygodni w każdą gierkę na ustawieniach Ultra :) Polecam z czystym sumieniem wziąć na raty 0%.', 5),
 (3, 'Enderdragon', '2023-11-02', 'Świetny serwis. Wcześniej sam składałem sobie komputery, bo przykładam dużą wagę do optymalnego dobrania podzespołów, aż wreszcie\r\nznalazłem ten sklep. Nie ma co poprawiać. Świetnie dobrane elementy i profesjonalne ustawienia Biosu. Praca wentylatorów dobrana tak, że\r\npodczas pracy pod Windowsem jest bardzo cicho, dopiero w grach jest głośniej, ale wtedy i tak zakładam słuchawki. Karta graficzna w grach\r\nbardzo wydajna, gram w rozdzielczości 3440x1440 bo taki mam monitor. Polecam.', 5),
 (4, 'Julka', '2024-01-18', 'Jako prezent urodzinowy dla 16 latka sprawdził się znakomicie. Szybka realizacja. Wysoka jakość i kultura pracy.', 5),
@@ -385,6 +393,13 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `mail` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `password`, `mail`) VALUES
+(4, 'adam2', 'zaq12wsx', '123@gmail.com');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -476,7 +491,7 @@ ALTER TABLE `rewiews`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
