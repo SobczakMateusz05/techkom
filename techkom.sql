@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 01:37 AM
+-- Generation Time: Feb 21, 2024 at 01:45 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -32,13 +32,6 @@ CREATE TABLE `cart` (
   `userid` int(11) DEFAULT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `userid`, `amount`) VALUES
-(0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -95,6 +88,13 @@ CREATE TABLE `orders` (
   `payment` int(11) DEFAULT NULL,
   `delivery` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`number`, `price`, `product`, `amount`, `date`, `userid`, `name`, `subname`, `tel`, `mail`, `miasto`, `home_number`, `street`, `payment`, `delivery`) VALUES
+(1765431, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -291,13 +291,6 @@ CREATE TABLE `reclamation` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `reclamation`
---
-
-INSERT INTO `reclamation` (`id`, `order_number`, `reason`, `date`) VALUES
-(5674, 1765432, 'abc', '2024-02-21');
-
 -- --------------------------------------------------------
 
 --
@@ -347,8 +340,7 @@ INSERT INTO `rewiews` (`id`, `username`, `date`, `review`, `rating`) VALUES
 (29, 'Kaalion', '2022-01-25', 'Niedawno odwiedziłem salon, aby odebrać zamówienie i jestem bardzo zadowolony. Obsługa na wysokim poziomie, zarówno profesjonalnym, jak i kulturalnym. Obsługiwał mnie bardzo miły Pan Piotr, który wykonał świetną robotę, nie mam żadnych zastrzeżeń :)', 5),
 (30, 'Karyna', '2024-02-17', 'Straszna obsługa, szczerze polecam każdy inny sklep niż ten. Obsługa zachowuje się jak po kilkudniowej imprezie, może nawet zrobić sobie przerwę na rozmowę.', 1),
 (31, 'Patrycja Rogowieeec', '2016-04-14', 'Zamówienie zostało złożone pod koniec miesiąca z zapewnieniem, że zostanie dostarczone i zafakturowane do ostatniego dnia miesiąca. Niestety po wielu interwencjach dostawa została zrealizowana w następnym miesiącu, co oznacza, że ​​klient otrzymuje obietnice jedynie złożenia zamówienia, a następnie zostaje odrzucony', 1),
-(32, 'BAJO JAJO', '2015-05-20', 'Muszę przyznać, że poziom szybkości obsługi klientów oraz kwestia oczekiwania na swoją kolej zawstydziła afrykańskich wykonawców dróg i nigeryjską służbę zdrowia. Uświadomiono mi, że „korki” w Afryce to nic. Pozdrowienia.', 1),
-(33, ' adam2', '2024-02-21', 'zimno', 3.5);
+(32, 'BAJO JAJO', '2015-05-20', 'Muszę przyznać, że poziom szybkości obsługi klientów oraz kwestia oczekiwania na swoją kolej zawstydziła afrykańskich wykonawców dróg i nigeryjską służbę zdrowia. Uświadomiono mi, że „korki” w Afryce to nic. Pozdrowienia.', 1);
 
 -- --------------------------------------------------------
 
@@ -393,13 +385,6 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `mail` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `name`, `password`, `mail`) VALUES
-(1, 'adam2', 'zaq12wsx', '123@gmail.com');
 
 --
 -- Indeksy dla zrzutów tabel
