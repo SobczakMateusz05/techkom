@@ -211,7 +211,11 @@ session_start();
                                         }
                                         if($result=$conn->query($sql)){
                                             while($row=$result->fetch_assoc()){
-                                                echo "<option value=". '"' . $row["procesor"]. '">'. $row["procesor"] . "</option>";
+                                                echo "<option value=". '"' . $row["procesor"]. '" ';
+                                                if(isset($_GET["proc"])&&$row["procesor"]==$_GET["proc"]){
+                                                    echo 'selected="selected"';
+                                                }
+                                                echo '>'. $row["procesor"] . "</option>";
                                             }
                                         }
                                     ?>
@@ -231,7 +235,11 @@ session_start();
                                         
                                         if($result=$conn->query($sql)){
                                             while($row=$result->fetch_assoc()){
-                                                echo "<option value=". '"' . $row["ram"]. '">'. $row["ram"] . " GB </option>";
+                                                echo "<option value=". '"' . $row["ram"]. '"';
+                                                if(isset($_GET["ram"])&&$row["ram"]==$_GET["ram"]){
+                                                    echo 'selected="selected"';
+                                                }
+                                                echo '>'. $row["ram"] . " GB </option>";
                                             }
                                         }
                                     ?>
@@ -323,7 +331,7 @@ session_start();
                         Najnowsze
                     </h2>
                     <?php
-                    $sql = " SELECT p.id, p.name, p.image FROM produkty as p join type as t on t.id=p.type where t.id!=7 ORDER BY p.id DESC LIMIT 20";
+                    $sql = " SELECT p.id, p.name, p.image FROM produkty as p join type as t on t.id=p.type where t.id!=7 ORDER BY p.id DESC LIMIT $num_row";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
