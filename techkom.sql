@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 02:04 AM
+-- Generation Time: Feb 21, 2024 at 02:07 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -29,17 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
-  `userid` int(11) DEFAULT NULL,
+  `userid` int(11) NOT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `userid`, `amount`) VALUES
-(15, 1, 5),
-(15, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -393,13 +385,6 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `mail` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `name`, `password`, `mail`) VALUES
-(4, 'adam2', 'zaq12wsx', '123@gmail.com');
 
 --
 -- Indeksy dla zrzutów tabel
