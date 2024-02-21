@@ -227,7 +227,7 @@
                     $erpass=7;
                 }
                 if($variable==3){
-                    
+                    $operator=0;
                     $i=0;
                     $sql="SELECT name from user";
 
