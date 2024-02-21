@@ -247,6 +247,9 @@
                         }
                         $result->free_result();
                     }
+                    else{
+                        $operator=0;
+                    }
     
                     if($operator==0){
                         $sql="INSERT INTO user(name, password, mail) values ('$login', '$pass', '$mail')";

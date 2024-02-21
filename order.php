@@ -116,12 +116,27 @@
             $pay=$_POST["pay"];
             $date=date('Y-m-d', time());
             $userid=$_SESSION["user"];
-
+            
             $sql="SELECT * from cart";
             $result=$conn->query($sql);
             while($row=$result->fetch_assoc()){
                 $id=$row["id"];
                 $amount=$row["amount"];
+
+                $prod=$row["id"];
+                $sql7="SELECT new_price from promotion where prod_id=$prod";
+                $result7=$conn->query($sql7);
+                if(mysqli_num_rows($result7)==0){
+                    $sql5="SELECT price from produkty where id=$id";
+                    $result5=$conn->query($sql5);
+                    $row5=$result5->fetch_assoc();
+                    $price =$row5["price"];
+                }
+                else{
+                    $row7=$result7->fetch_assoc();
+                    $price=$row7["new_price"];
+                }
+
                 $sql2="INSERT INTO orders(number,
                 product,
                 amount,
@@ -135,6 +150,7 @@
                 street,
                 payment,
                 delivery,
+                price,
                 userid
                 ) values(
                     '$number',
@@ -150,6 +166,7 @@
                     '$street',
                     '$pay',
                     '$delivery',
+                    '$price',
                     '$userid')";
                 $result2=$conn->query($sql2);
             }
@@ -202,7 +219,7 @@
                 <h3>Łączna kwota:
                     <?php
                         $sum=0;
-                        $sql = "SELECT p.price as price , o.amount as amount, d.cost as del from ((orders as o join delivery as d on d.id=o.delivery) join produkty as p on o.product = p.id) where o.number=$number";
+                        $sql = "SELECT o.price as price, o.amount as amount, d.cost as del from ((orders as o join delivery as d on d.id=o.delivery) join produkty as p on o.product = p.id) where o.number=$number";
                         $result = $conn -> query($sql);
                         while($row=$result->fetch_assoc()){
                             $sum+=$row["price"]*$row["amount"];

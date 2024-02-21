@@ -109,7 +109,7 @@ if($_GET["operation"]=="addprom"){
     if($num_row==0){
         $sql = "INSERT INTO cart(id, amount, userid) values($prod, 1, $id)";
         if($result=$conn->query($sql)){
-            header("Location:prom.php?prod=$prod&add=yes");
+            header("Location:promotion.php?prod=$prod&add=yes");
         }
     }
     else{
@@ -120,10 +120,10 @@ if($_GET["operation"]=="addprom"){
             $amount = $row['amount']+1;
             $sql = "UPDATE cart SET amount = $amount where userid=$id";
             $result = $conn->query($sql);
-            header("Location:prom.php?prod=$prod&add=yes");
+            header("Location:promotion.php?prod=$prod&add=yes");
         }
         else{
-            header("Location:prom.php?prod=$prod&add=no");
+            header("Location:promotion.php?prod=$prod&add=no");
         }
     }
 }

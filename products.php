@@ -108,7 +108,7 @@
                     </h2>
                     <div class="items">
                         <?php
-                        $sql = "SELECT nazwa, imageT FROM type";
+                        $sql = "SELECT nazwa, imageT FROM type where id!=7";
                         if($result=$conn->query($sql)){
                             while($row=$result->fetch_assoc()){
                                 

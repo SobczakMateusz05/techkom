@@ -1,6 +1,6 @@
 <?php 
 Function products($conn){
-    $sql="SELECT nazwa from type";
+    $sql="SELECT nazwa from type where id!=7 ";
     if($result=$conn->query($sql)){
         while($row=$result->fetch_assoc()){
             echo '<li class="products disable disable-selection"><a href="#" onclick="category('."'". $row["nazwa"]. "'". ')">'. UCWORDS($row["nazwa"]).'</a></li>';
@@ -19,8 +19,23 @@ Function options($a){
 }
 
 Function cartitem($image, $name, $price, $amount, $id){
+    $db_host = "localhost";
+    $db_user = "root";
+    $db_pass = "";
+    $db_name = "techkom";
+    $conn = @new mysqli($db_host, $db_user, $db_pass, $db_name);
     echo '<div class="element"><div class="product"><img src="data:image/jpg;charset=utf8;base64,'.base64_encode($image).'" /><h3>';
-    echo $name. '</h3></div><div class="options"><h3 class="price">'. $price. ' zł';
+    echo $name. '</h3></div><div class="options"><h3 class="price">'; 
+    $sql="SELECT new_price from promotion where prod_id=$id";
+    $result=$conn->query($sql);
+    if(mysqli_num_rows($result)==0){
+        echo $price;
+    }
+    else{
+        $row=$result->fetch_assoc();
+        echo $row["new_price"];
+    }
+    echo ' zł';
     echo '</h3> <form method="POST" action="operation.php?prod='.$id .'&operation=amount">';
     echo '<select name="amount" class="amount" onchange="this.form.submit()">';
     options($amount);

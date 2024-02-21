@@ -323,7 +323,7 @@ session_start();
                         Najnowsze
                     </h2>
                     <?php
-                    $sql = " SELECT * FROM produkty ORDER BY id DESC LIMIT $num_row";
+                    $sql = " SELECT p.id, p.name, p.image FROM produkty as p join type as t on t.id=p.type where t.id!=7 ORDER BY p.id DESC LIMIT 20";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
 		                {
