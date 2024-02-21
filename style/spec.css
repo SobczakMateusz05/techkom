@@ -100,3 +100,10 @@
     cursor: pointer;
     box-shadow: rgb(110, 110, 110) 5px 5px 7px;
 }
+.overline{
+    text-decoration: line-through;
+    font-size: large;
+}
+.red{
+    color: red;
+}

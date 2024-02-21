@@ -85,7 +85,7 @@
 .popular-post img{
     border: 3px black solid;
     border-radius: 15px;
-    max-width: 400px;
+    width: 400px;
 }
 .popular-post:hover{
     cursor: pointer;
@@ -144,7 +144,8 @@
 .suggest-post img{
     border: 3px black solid;
     border-radius: 15px;
-    max-height: 100px;
+    height: 100px;
+    width: 100px;
 }
 .suggest-post h2{
     max-width: 200px;
