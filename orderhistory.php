@@ -182,7 +182,7 @@
                 <div class="cart">
                 <?php
                     if(isset($_GET["number"])){
-                        $sql = "SELECT p.name, p.image, p.price, o.amount, d.cost, o.delivery from (orders as o join produkty as p on o.product=p.id) join delivery as d on d.id=o.delivery where number=$number and userid=$id";
+                        $sql = "SELECT p.name, p.image, o.price, o.amount, d.cost, o.delivery from (orders as o join produkty as p on o.product=p.id) join delivery as d on d.id=o.delivery where number=$number and userid=$id";
                         if($result=$conn->query($sql)){
                             $sum=0;
                             while($row=$result->fetch_assoc()){

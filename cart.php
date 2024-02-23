@@ -149,11 +149,11 @@ session_start();
                                     }
                                     else{
                                         $row7=$result7->fetch_assoc();
-                                        @$price=$row7["new_price"];
+                                        $price=$row7["new_price"];
                                     }
 
                                     $sum+=$price*$row["amount"];
-                                while($row=$result->fetch_assoc()){
+                                    while($row=$result->fetch_assoc()){
                                     cartitem($row["image"], $row["name"], $row["price"], $row["amount"], $row["id"]);
                                     $prod=$row["id"];
                                     $sql7="SELECT new_price from promotion where prod_id=$prod";
@@ -162,8 +162,8 @@ session_start();
                                         $price =$row["price"];
                                     }
                                     else{
-                                        $row7=$result->fetch_assoc();
-                                        @$price=$row7["new_price"];
+                                        $row7=$result7->fetch_assoc();
+                                        $price=$row7["new_price"];                               
                                     }
 
                                     $sum+=$price*$row["amount"];

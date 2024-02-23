@@ -118,7 +118,7 @@
                         }
                     ?>
                     <div class="flex">
-                        <a href="index.php" class="button2">
+                        <a href="promotion.php" class="button2">
                         Kontunnuj zakupy</a>
                         <?php
                             if(isset($_GET["log"])){
