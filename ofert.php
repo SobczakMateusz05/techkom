@@ -249,7 +249,7 @@ session_start();
                     </div>
                     <?php
                     $category=$_GET["category"];
-                    $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
+                    $sql = " SELECT *, p.id , IF(prom.new_price is not null, new_price, price) as price1 FROM produkty as p  left join promotion as prom on p.id=prom.prod_id JOIN type as t ON p.type = t.id WHERE t.nazwa='$category'";
 
                     if(isset($_GET["ram"])||isset($_GET["proc"])||isset($_GET["ram"])&&isset($_GET["proc"])){
                         if(isset($_GET["ram"])){
@@ -265,23 +265,23 @@ session_start();
                             $proc=0;
                         }
                         if($ram!=0&&$proc!=0){
-                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram' and p.procesor='$proc'";
+                            $sql = " SELECT *, p.id , IF(prom.new_price is not null, new_price, price) as price1 FROM produkty as p  left join promotion as prom on p.id=prom.prod_id JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram' and p.procesor='$proc'";
                         }
                         if($ram!=0&&$proc==0){
-                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram'";
+                            $sql = " SELECT *, p.id , IF(prom.new_price is not null, new_price, price) as price1 FROM produkty as p  left join promotion as prom on p.id=prom.prod_id JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.ram='$ram'";
                         }
                         if($ram==0&&$proc!=0){
-                            $sql = " SELECT *, p.id FROM produkty as p JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.procesor='$proc'";
+                            $sql = " SELECT *, p.id , IF(prom.new_price is not null, new_price, price) as price1 FROM produkty as p  left join promotion as prom on p.id=prom.prod_id JOIN type as t ON p.type = t.id WHERE t.nazwa='$category' and p.procesor='$proc'";
                         }
-                        
+                        //SELECT *, IF(prom.new_price is not null, new_price, price) as price1 from produkty as p left join promotion as prom on p.id=prom.prod_id 
                     }
                     if(isset($_GET["sort"])){
                         if($_GET["sort"]==1){
-                            $sortowanie = "ORDER BY p.price ASC";
+                            $sortowanie = "ORDER BY price1 ASC";
                             $sql = $sql . $sortowanie;
                         }
                         if($_GET["sort"]==2){
-                            $sortowanie= "ORDER BY p.price DESC";
+                            $sortowanie= "ORDER BY price1 DESC";
                             $sql = $sql . $sortowanie;
                         }
                     }
