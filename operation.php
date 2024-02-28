@@ -22,12 +22,12 @@ if($_GET["operation"]=="add"){
         header("Location:ofert.php?category=$category&add=yes");
     }
     else{
-        $sql ="SELECT amount from cart";
+        $sql ="SELECT amount from cart where userid=$id and id=$prod";
         $result=$conn->query($sql);
         $row = $result -> fetch_assoc();
         if($row['amount']<5){
             $amount = $row['amount']+1;
-            $sql = "UPDATE cart SET amount = $amount where userid=$id";
+            $sql = "UPDATE cart SET amount = $amount where userid=$id and id=$prod";
             $result = $conn->query($sql);
             $sql = " SELECT nazwa FROM produkty as p JOIN type as t ON p.type = t.id WHERE p.id=$prod";
             $result=$conn->query($sql);
@@ -58,12 +58,12 @@ if($_GET["operation"]=="addindex"){
         }
     }
     else{
-        $sql ="SELECT amount from cart";
+        $sql ="SELECT amount from cart where userid=$id and id=$prod";
         $result=$conn->query($sql);
         $row = $result -> fetch_assoc();
         if($row['amount']<5){
             $amount = $row['amount']+1;
-            $sql = "UPDATE cart SET amount = $amount where userid=$id";
+            $sql = "UPDATE cart SET amount = $amount where userid=$id and id=$prod";
             $result = $conn->query($sql);
             header("Location:index.php?add=yes");
         }
@@ -86,12 +86,12 @@ if($_GET["operation"]=="addspec"){
         }
     }
     else{
-        $sql ="SELECT amount from cart";
+        $sql ="SELECT amount from cart where userid=$id and id=$prod";
         $result=$conn->query($sql);
         $row = $result -> fetch_assoc();
         if($row['amount']<5){
             $amount = $row['amount']+1;
-            $sql = "UPDATE cart SET amount = $amount where userid=$id";
+            $sql = "UPDATE cart SET amount = $amount where userid=$id and id=$prod";
             $result = $conn->query($sql);
             header("Location:spec.php?prod=$prod&add=yes");
         }
@@ -113,12 +113,12 @@ if($_GET["operation"]=="addprom"){
         }
     }
     else{
-        $sql ="SELECT amount from cart";
+        $sql ="SELECT amount from cart where userid=$id and id=$prod";
         $result=$conn->query($sql);
         $row = $result -> fetch_assoc();
         if($row['amount']<5){
             $amount = $row['amount']+1;
-            $sql = "UPDATE cart SET amount = $amount where userid=$id";
+            $sql = "UPDATE cart SET amount = $amount where userid=$id and id=$prod";
             $result = $conn->query($sql);
             header("Location:promotion.php?prod=$prod&add=yes");
         }

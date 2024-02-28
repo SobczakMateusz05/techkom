@@ -126,7 +126,7 @@
                     ?>
                 / 5</h4>
                 <?php
-                    $sql = " SELECT * FROM rewiews";
+                    $sql = " SELECT * FROM rewiews ORDER BY date DESC";
                     if($result = $conn->query($sql)){
                         while($row=$result->fetch_assoc()) 
                         {

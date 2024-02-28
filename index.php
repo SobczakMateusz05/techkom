@@ -158,7 +158,7 @@
                                 $row7=$result7->fetch_assoc();
                                 echo '<h2 class="overline">'. $row["price"]. ' zł</h2><h2 class="red">'. $row7["new_price"]. ' zł</h2>';                                
                             }
-                            echo '</div><div class="addbasket disable-selection"> <a href="operation.php?prod='. $row["id"] . '&operation=addindex"'.'onclick="operation('.$row["id"].',';
+                            echo '</div><div class="addbasket disable-selection"> <a href="#"'. 'onclick="operation('.$row["id"].',';
                             if(isset($_SESSION["user"])&&$_SESSION["user"]!=""){
                                 echo  "'addindex'";
                             }

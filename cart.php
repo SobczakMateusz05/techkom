@@ -16,13 +16,13 @@ session_start();
     <script src="script.js"></script>
     <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcchnApAAAAAIvWz1qZKS1y798KNZxHieP0mQ9J"></script>
     <script>
-                          function onClick(e) {
-                            e.preventDefault();
-                            grecaptcha.enterprise.ready(async () => {
-                              const token = await grecaptcha.enterprise.execute('6LcchnApAAAAAIvWz1qZKS1y798KNZxHieP0mQ9J', {action: 'LOGIN'});
-                            });
-                          }
-                        </script>
+      function onClick(e) {
+        e.preventDefault();
+        grecaptcha.enterprise.ready(async () => {
+          const token = await grecaptcha.enterprise.execute('6LcchnApAAAAAIvWz1qZKS1y798KNZxHieP0mQ9J', {action: 'LOGIN'});
+        });
+      }
+    </script>
 </head>
 <body>
     <header>
