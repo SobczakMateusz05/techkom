@@ -67,8 +67,11 @@ session_start();
         </ul>
     </header>
     <main>
-        <div class="left">
+        <!-- sidebar__menu -->
+        <div class="left  ">
+            <!-- sidebar__menu-headline -->
             <h2 class="shop disable-selection">Ten Sklep</h2>
+            
             <ul class="lista" > 
                 <li class="disable-selection liststylenone" onclick="list('products')"> Produkty</li>
                 <ul class="lista">
