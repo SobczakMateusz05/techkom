@@ -1,8 +1,8 @@
-*Techkom*
+**Techkom**
 
 Full working shop system without payment. Project in 100% PHP, so it's not the best option. Created for school project. Looking wasn't matter, so it's not looking good
 
-**The website includes:**
+***The website includes:***
 
 - Company history (created with a smile),
 - Company contact details (created with a smile),
@@ -29,7 +29,7 @@ Full working shop system without payment. Project in 100% PHP, so it's not the b
 - Ability to add reviews (for logged-in accounts, the username is automatically fetched),
 - An unused image of a cute running dog in the files :-)
 
-**The database includes:**
+***The database includes:***
 
 - Products and service offerings,
 - Product categories,
